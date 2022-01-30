@@ -13,10 +13,10 @@ mousedown, mousemove, mouseup 이벤트리스너를 추가하여 마우스 클�
 ### 실행 방법
 
 어플리케이션 실행 후 DOM 안에서 어느 곳을 클릭하던지 해당 기능을 사용하실 수 있습니다.
-<img width="80%" src="https://user-images.githubusercontent.com/36434219/151656821-c5542afa-2834-4b95-be39-6a77603848bc.gif">
+<img src="https://user-images.githubusercontent.com/36434219/151656821-c5542afa-2834-4b95-be39-6a77603848bc.gif">
 <br>
 
-## 2. Toggle
+## 1. Toggle
 
 ### 구현 방법
 
@@ -37,4 +37,28 @@ ON / OFF의 대명사인 Toggle을 라이브러리 없이 구현하는 경험을
 ### 실행 방법
 
 토글 스위치에 마우스를 갖다대고 길게 클릭하시거나 짧게 클릭하시면 스위치가 토글됩니다.
-<img width="80%" src="https://user-images.githubusercontent.com/36434219/151656859-6dd95f4a-162c-481a-9e1a-fdd2a8017597.gif">
+<img src="https://user-images.githubusercontent.com/36434219/151660862-fbca442b-1d6b-49ed-a1ff-d67d9a8e034c.gif">
+<br>
+
+## 2. Modal
+
+### 구현 방법
+
+clicked라는 state를 만들어서 mouseup 이벤트가 발생할 때마다 Modal 컴포넌트가 업데이트되면서 css 효과가 적용되어 리렌더링되게끔 구현하였습니다.
+버튼 색깔, 버튼 글자 색깔, 모달 컨텐츠 글자 색깔, 모달 컨텐츠 텍스트와 모달 이외의 부분을 클릭시 모달이 사라지는 기능을 선택할 수 있게끔 옵션으로 두었습니다.
+
+### 구현 이유
+
+리액트는 데이터 업데이트 시의 처리 간결성이 핵심이므로 그 취지에 맞게 state 변경시 관련 컴포넌트만 리렌더링되도록 구현하고자 하였습니다.
+
+### 에러 로그
+
+버튼 클릭시 나오는 모달 관련 디테일적인 부분에서 css 효과를 주는 데에 시간이 약간 소요되었습니다.
+css 스타일에서 중복되는 코드가 발생하여 Toggle 컴포넌트의 style을 재활용할 수 있게 공통 모듈화하여 재사용할 수 있도록 하였습니다.
+
+### 실행 방법
+
+Open Modal 버튼 클릭시 모달이 보여지고 모달의 X 버튼 클릭 혹은 모달 이외의 부분 클릭시 모달이 사라집니다.
+만약, 모달 이외의 부분 클릭시 모달이 사라지게끔 하고 싶다면 outsideClose Prop을 true로 설정하시면 됩니다.
+밑의 예시는 outsideClose를 true로 설정한 경우입니다.
+<img src="https://user-images.githubusercontent.com/36434219/151684355-f28f2eaa-c211-4d5f-95b3-fb258ea52afc.gif">

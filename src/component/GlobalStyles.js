@@ -1,7 +1,7 @@
-import { createGlobalStyle } from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
 
-const GlobalStyles = createGlobalStyle`
+export const GlobalStyles = createGlobalStyle`
     ${reset};
     
     a {
@@ -11,10 +11,20 @@ const GlobalStyles = createGlobalStyle`
     * {
         box-sizing: border-box;
     }
-    body {
-        padding: 30px;
-    }
 
 `;
 
-export default GlobalStyles;
+export const Box = styled.div`
+  padding: 30px 30px 100px;
+`;
+
+export const Title = styled.div`
+  font-size: 24px;
+  font-weight: bold;
+  padding-bottom: 30px;
+`;
+
+export const Container = styled.div`
+  text-align: center;
+  padding: 80px;
+`;

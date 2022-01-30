@@ -12,7 +12,7 @@ const Circle = styled.div`
   z-index: 0;
 
   &.clicking {
-    z-index: 1;
+    z-index: 2;
     display: block;
   }
 `;
@@ -24,7 +24,6 @@ function MouseCircle() {
   const [y, setY] = useState(0);
 
   const handleMouseDown = (event) => {
-    console.log("catch");
     const x = event.clientX - HALF_RADIUS;
     const y = event.clientY - HALF_RADIUS;
 
@@ -34,7 +33,6 @@ function MouseCircle() {
   };
 
   const handleMouseMove = (event) => {
-    console.log("hi");
     const x = event.clientX - HALF_RADIUS;
     const y = event.clientY - HALF_RADIUS;
 

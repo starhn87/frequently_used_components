@@ -1,15 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-
-const Title = styled.div`
-  font-size: 24px;
-  font-weight: bold;
-  padding-bottom: 30px;
-`;
-
-const Container = styled.div`
-  text-align: center;
-`;
+import { Box, Container, Title } from "./GlobalStyles";
 
 const Switch = styled.label`
   position: relative;
@@ -53,7 +44,7 @@ const Slider = styled.span`
     width: 26px;
     left: 4px;
     bottom: 4px;
-    background-color: white;
+    background-color: ${(props) => props.switchButtonColor};
     -webkit-transition: 0.5s;
     transition: 0.5s;
   }
@@ -92,6 +83,7 @@ function Toggle({
   defaultChecked = false,
   color = "#4800ce",
   disabled = false,
+  switchButtonColor = "white",
 }) {
   const [checked, setChecked] = useState(defaultChecked);
   const toggler = useRef();
@@ -110,16 +102,21 @@ function Toggle({
   }, [checked, onClick]);
 
   return (
-    <>
+    <Box>
       <Title>Toggle</Title>
       <Container>
         <Switch>
-          <Input type="checkbox" checked={checked} />
-          <Slider ref={toggler} color={color} disabled={disabled}></Slider>
+          <Input type="checkbox" checked={checked} readOnly />
+          <Slider
+            ref={toggler}
+            color={color}
+            disabled={disabled}
+            switchButtonColor={switchButtonColor}
+          ></Slider>
         </Switch>
         <Explain>{`Toggle Switch ${checked ? "ON" : "OFF"}`}</Explain>
       </Container>
-    </>
+    </Box>
   );
 }
 
