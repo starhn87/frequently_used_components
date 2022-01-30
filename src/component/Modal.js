@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import { Box, Container, Title } from "./GlobalStyles";
+import Wrapper from "./common/Wrapper";
 
 const Button = styled.button`
   width: 120px;
@@ -41,7 +41,7 @@ const ModalContent = styled.div`
   background-color: #fefefe;
 `;
 
-const Wrapper = styled.div`
+const CloseWrapper = styled.div`
   padding-bottom: 30px;
 `;
 
@@ -116,26 +116,23 @@ function Modal({
   }, [clicked, openModal, closeModal, outsideCloseModal, closeOption]);
 
   return (
-    <Box>
-      <Title>Modal</Title>
-      <Container>
-        <Button
-          ref={modalBtn}
-          buttonColor={buttonColor}
-          buttonTextColor={buttonTextColor}
-        >
-          Open Modal
-        </Button>
-        <ModalBox ref={modal} clicked={clicked}>
-          <ModalContent>
-            <Wrapper>
-              <Close ref={closeBtn}>&times;</Close>
-            </Wrapper>
-            <Text modalTextColor={modalTextColor}>{modalText}</Text>
-          </ModalContent>
-        </ModalBox>
-      </Container>
-    </Box>
+    <Wrapper title="Modal">
+      <Button
+        ref={modalBtn}
+        buttonColor={buttonColor}
+        buttonTextColor={buttonTextColor}
+      >
+        Open Modal
+      </Button>
+      <ModalBox ref={modal} clicked={clicked}>
+        <ModalContent>
+          <CloseWrapper>
+            <Close ref={closeBtn}>&times;</Close>
+          </CloseWrapper>
+          <Text modalTextColor={modalTextColor}>{modalText}</Text>
+        </ModalContent>
+      </ModalBox>
+    </Wrapper>
   );
 }
 

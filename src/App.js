@@ -1,6 +1,7 @@
-import { GlobalStyles } from "./component/GlobalStyles";
+import { GlobalStyles } from "./component/common/GlobalStyles";
 import Modal from "./component/Modal";
-import MouseCircle from "./component/MouseCircle";
+import MouseCircle from "./component/common/MouseCircle";
+import Tab from "./component/Tab";
 import Toggle from "./component/Toggle";
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
         switchButtonColor="aliceblue"
       />
       <Modal modalText="wassssssssssup!" outsideClose={true} />
+      <Tab />
     </>
   );
 }

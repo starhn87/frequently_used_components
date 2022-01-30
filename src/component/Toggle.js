@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import { Box, Container, Title } from "./GlobalStyles";
+import Wrapper from "./common/Wrapper";
 
 const Switch = styled.label`
   position: relative;
@@ -102,21 +102,18 @@ function Toggle({
   }, [checked, onClick]);
 
   return (
-    <Box>
-      <Title>Toggle</Title>
-      <Container>
-        <Switch>
-          <Input type="checkbox" checked={checked} readOnly />
-          <Slider
-            ref={toggler}
-            color={color}
-            disabled={disabled}
-            switchButtonColor={switchButtonColor}
-          ></Slider>
-        </Switch>
-        <Explain>{`Toggle Switch ${checked ? "ON" : "OFF"}`}</Explain>
-      </Container>
-    </Box>
+    <Wrapper title="Toggle">
+      <Switch>
+        <Input type="checkbox" checked={checked} readOnly />
+        <Slider
+          ref={toggler}
+          color={color}
+          disabled={disabled}
+          switchButtonColor={switchButtonColor}
+        ></Slider>
+      </Switch>
+      <Explain>{`Toggle Switch ${checked ? "ON" : "OFF"}`}</Explain>
+    </Wrapper>
   );
 }
 
