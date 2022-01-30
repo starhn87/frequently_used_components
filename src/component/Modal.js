@@ -71,6 +71,7 @@ function Modal({
   const modal = useRef();
 
   const [clicked, setClicked] = useState(false);
+  const [closeOption, setCloseOption] = useState(outsideClose);
 
   const openModal = useCallback(() => {
     if (!clicked) {
@@ -100,7 +101,7 @@ function Modal({
     const closeBtnCurrent = closeBtn.current;
     closeBtnCurrent.addEventListener("mouseup", closeModal);
 
-    if (outsideClose) {
+    if (closeOption) {
       window.addEventListener("mouseup", outsideCloseModal);
     }
 
@@ -108,11 +109,11 @@ function Modal({
       modalBtnCurrent.removeEventListener("mouseup", openModal);
       closeBtnCurrent.removeEventListener("mouseup", closeModal);
 
-      if (outsideClose) {
+      if (closeOption) {
         window.addEventListener("mouseup", outsideCloseModal);
       }
     };
-  }, [clicked, openModal, closeModal, outsideCloseModal, outsideClose]);
+  }, [clicked, openModal, closeModal, outsideCloseModal, closeOption]);
 
   return (
     <Box>

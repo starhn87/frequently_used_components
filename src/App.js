@@ -8,12 +8,12 @@ function App() {
     <>
       <GlobalStyles />
       <MouseCircle />
-      {/* <Toggle
+      <Toggle
         defaultChecked={false}
         color="blue"
         disabled={false}
         switchButtonColor="aliceblue"
-      /> */}
+      />
       <Modal modalText="wassssssssssup!" outsideClose={true} />
     </>
   );
