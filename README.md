@@ -76,3 +76,34 @@ Open Modal 버튼 클릭시 모달이 보여지고 모달의 X 버튼 클릭 혹
 만약, 모달 이외의 부분 클릭시 모달이 사라지게끔 하고 싶다면 outsideClose Prop을 true로 설정하시면 됩니다.
 밑의 예시는 outsideClose를 true로 설정한 경우입니다.
 <img src="https://user-images.githubusercontent.com/36434219/151684355-f28f2eaa-c211-4d5f-95b3-fb258ea52afc.gif">
+<br>
+
+## 3. Tab
+
+### 구현 방법
+
+selected라는 state를 두어 탭 내에서 클릭 이벤트가 발생할 때마다 onClick 속성으로 selected가 변경되도록 하여 highlight될 수 있도록 하였습니다.
+default 활성화 탭, 탭 색깔, 탭 문구와 탭 컨텐츠 문구를 정의하는 객체를 옵션으로 설정함으로써 변경할 수 있도록 하였습니다.
+
+### 구현 이유
+
+컴포넌트 단위로 동작하는 리액트의 특성에 맞게 JSX 문법에 data-attribute 속성이나 id를 추가하기 보다는 onClick 함수를 넣어줌으로써 구현하였습니다.
+
+### 에러 로그
+
+탭 선택에 따른 텍스트 변경을 어떤 식으로 처리할 지 고민하였습니다.
+TABS_ITEMS 객체의 key 값을 index처럼 사용할 수 있게 두고 selected state와 연동될 수 있도록 하여 바로 가져올 수 있도록 해결하였습니다.
+
+### 실행 방법
+
+탭을 클릭하시면 활성화되는 탭이 바뀌면서 문구도 바뀌게 됩니다.
+<img src="https://user-images.githubusercontent.com/36434219/151799658-abb8f875-800b-40ac-ad34-64facad4a426.gif">
+<br>
+
+## 4. Tag
+
+### 구현 방법
+
+입력한 tag들을 담은 배열인 tags와 focus라는 state를 가지고 태그 입력시와 포커스 여부에 따라 컴포넌트가 업데이트되어 리렌더링하게끔 구현하였습니다.
+
+### 구현 이유

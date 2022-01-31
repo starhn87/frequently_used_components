@@ -14,12 +14,12 @@ const Button = styled.button`
 
 const ModalBox = styled.div`
   position: fixed;
-  z-index: 1;
-  left: 0;
+  overflow: auto;
   top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  overflow: auto;
+  z-index: 1;
   background-color: rgba(0, 0, 0, 0.4);
 
   ${(props) =>
@@ -31,10 +31,10 @@ const ModalBox = styled.div`
 `;
 
 const ModalContent = styled.div`
-  margin: 20% auto;
-  padding: 10px;
   width: 300px;
   height: 120px;
+  margin: 20% auto;
+  padding: 10px;
   border: 1px solid #888;
   border-radius: 12px;
   border-color: transparent;

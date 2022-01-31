@@ -11,7 +11,6 @@ const Switch = styled.label`
 
 const Slider = styled.span`
   position: absolute;
-  cursor: pointer;
   top: 0;
   left: 0;
   right: 0;
@@ -24,9 +23,10 @@ const Slider = styled.span`
     )
     right;
   background-size: 200%;
-  -webkit-transition: 0.5s;
-  transition: 0.5s;
   border-radius: 34px;
+  transition: 0.5s;
+  -webkit-transition: 0.5s;
+  cursor: pointer;
 
   ${(props) =>
     props.disabled
@@ -37,23 +37,23 @@ const Slider = styled.span`
       : ""}
 
   &:before {
-    border-radius: 50%;
     position: absolute;
-    content: "";
-    height: 26px;
-    width: 26px;
     left: 4px;
     bottom: 4px;
+    height: 26px;
+    width: 26px;
     background-color: ${(props) => props.switchButtonColor};
+    border-radius: 50%;
+    content: "";
     -webkit-transition: 0.5s;
     transition: 0.5s;
   }
 `;
 
 const Input = styled.input`
-  opacity: 0;
   width: 0;
   height: 0;
+  opacity: 0;
 
   ${(props) =>
     props.checked
@@ -88,18 +88,18 @@ function Toggle({
   const [checked, setChecked] = useState(defaultChecked);
   const toggler = useRef();
 
-  const onClick = useCallback(() => {
+  const handleClick = useCallback(() => {
     setChecked(!checked);
   }, [checked]);
 
   useEffect(() => {
     const toggleSwitch = toggler.current;
-    toggleSwitch.addEventListener("mouseup", onClick);
+    toggleSwitch.addEventListener("mouseup", handleClick);
 
     return () => {
-      toggleSwitch.removeEventListener("mouseup", onClick);
+      toggleSwitch.removeEventListener("mouseup", handleClick);
     };
-  }, [checked, onClick]);
+  }, [checked, handleClick]);
 
   return (
     <Wrapper title="Toggle">

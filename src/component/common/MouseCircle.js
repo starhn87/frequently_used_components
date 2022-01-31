@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 
 const Circle = styled.div`
-  position: absolute;
+  position: fixed;
   display: none;
   width: 50px;
   height: 50px;
@@ -12,8 +12,8 @@ const Circle = styled.div`
   z-index: 0;
 
   &.clicking {
-    z-index: 2;
     display: block;
+    z-index: 2;
   }
 `;
 
