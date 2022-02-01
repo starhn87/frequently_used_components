@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import Wrapper from "./common/Wrapper";
 import { v4 as uuid } from "uuid";
@@ -154,7 +154,7 @@ const Input = styled.input`
   border-radius: 17px;
 
   ${(props) =>
-    props.count === 0 || !props.focus
+    props.count === 0
       ? `
       &: focus {
         box-shadow: 0 5px 4px -2px #dbdbdb;
@@ -192,7 +192,7 @@ const List = styled.ul`
   box-shadow: 0 5px 4px -2px #dbdbdb;
   border-bottom-right-radius: 17px;
   border-bottom-left-radius: 17px;
-  display: ${(props) => (props.count === 0 || !props.focus ? "none" : "block")};
+  display: ${(props) => (props.count === 0 ? "none" : "block")};
 `;
 
 const Data = styled.li`
@@ -207,7 +207,7 @@ const Data = styled.li`
 function AutoComplete({ WordList = TOP_100_MOVIES }) {
   const input = useRef();
   const xButton = useRef();
-  const [focus, setFocus] = useState(false);
+  const recoList = useRef();
   const [value, setValue] = useState("");
   const [wordList, setWordList] = useState([]);
 
@@ -237,13 +237,21 @@ function AutoComplete({ WordList = TOP_100_MOVIES }) {
     setValue(word);
   };
 
-  const onFocus = () => {
-    setFocus(true);
+  const handleClick = (event) => {
+    if (event.target === recoList) {
+      return;
+    }
+
+    setWordList([]);
   };
 
-  const onBlur = () => {
-    setFocus(false);
-  };
+  useEffect(() => {
+    document.addEventListener("click", handleClick);
+
+    return () => {
+      document.removeEventListener("click", handleClick);
+    };
+  }, [wordList]);
 
   return (
     <Wrapper title="AutoComplete">
@@ -253,17 +261,14 @@ function AutoComplete({ WordList = TOP_100_MOVIES }) {
             ref={input}
             type="text"
             onChange={onChange}
-            onFocus={onFocus}
-            onBlur={onBlur}
             value={value}
             count={wordList.length}
-            focus={focus}
           />
           <Xbutton ref={xButton} onClick={onClick}>
             x
           </Xbutton>
         </Box>
-        <List count={wordList.length} focus={focus}>
+        <List ref={recoList} count={wordList.length}>
           {wordList.map((word) => (
             <Data key={uuid()} onClick={() => inputWord(word.label)}>
               {word.label}
