@@ -1,5 +1,8 @@
 # 원티드 프리온보딩 프론트엔드 코스 사전과제
 
+<br>
+<br>
+
 ## 공통. Wrapper
 
 ### 구현 방법
@@ -13,6 +16,8 @@ Toggle, Modal 등의 컴포넌트들의 레이아웃을 공통 모듈로 관리�
 ### 실행 방법
 
 Toggle, Modal 등의 컴포넌트 렌더링을 위한 JSX의 가장 바깥에 Wrapper를 import한 태그로 감싸주고 title과 children 속성에 맞게 작성하면 됩니다.
+<br>
+<br>
 
 ## 공통. MouseCircle
 
@@ -28,6 +33,7 @@ mousedown, mousemove, mouseup 이벤트리스너를 추가하여 마우스 클�
 
 어플리케이션 실행 후 DOM 안에서 어느 곳을 클릭하던지 해당 기능을 사용하실 수 있습니다.
 <img src="https://user-images.githubusercontent.com/36434219/151656821-c5542afa-2834-4b95-be39-6a77603848bc.gif">
+<br>
 <br>
 
 ## 1. Toggle
@@ -53,6 +59,7 @@ ON / OFF의 대명사인 Toggle을 라이브러리 없이 구현하는 경험을
 토글 스위치에 마우스를 갖다대고 길게 클릭하시거나 짧게 클릭하시면 스위치가 토글됩니다.
 <img src="https://user-images.githubusercontent.com/36434219/151660862-fbca442b-1d6b-49ed-a1ff-d67d9a8e034c.gif">
 <br>
+<br>
 
 ## 2. Modal
 
@@ -77,6 +84,7 @@ Open Modal 버튼 클릭시 모달이 보여지고 모달의 X 버튼 클릭 혹
 밑의 예시는 outsideClose를 true로 설정한 경우입니다.
 <img src="https://user-images.githubusercontent.com/36434219/151684355-f28f2eaa-c211-4d5f-95b3-fb258ea52afc.gif">
 <br>
+<br>
 
 ## 3. Tab
 
@@ -99,6 +107,7 @@ TABS_ITEMS 객체의 key 값을 index처럼 사용할 수 있게 두고 selected
 탭을 클릭하시면 활성화되는 탭이 바뀌면서 문구도 바뀌게 됩니다.
 <img src="https://user-images.githubusercontent.com/36434219/151799658-abb8f875-800b-40ac-ad34-64facad4a426.gif">
 <br>
+<br>
 
 ## 4. Tag
 
@@ -107,3 +116,16 @@ TABS_ITEMS 객체의 key 값을 index처럼 사용할 수 있게 두고 selected
 입력한 tag들을 담은 배열인 tags와 focus라는 state를 가지고 태그 입력시와 포커스 여부에 따라 컴포넌트가 업데이트되어 리렌더링하게끔 구현하였습니다.
 
 ### 구현 이유
+
+엔터 키를 누르거나 x 버튼 클릭시 tags 배열을 업데이트하여 리렌더링되도록 하였고 focus state를 만들어서 포커스 여부에 따라 변경되도록 하여 css 효과를 주었습니다.
+
+### 에러 로그
+
+input 창 안에 어떻게 태그를 넣는 과정에서 난관을 겪었습니다.
+문제를 해결하기 위해 tag list와 input을 감싸는 div를 만들어서 tag list와 input을 나란히 배치되도록 하고 input 창 포커스시 div에 효과를 주어서 input 박스 안에 태그와 입력 부분이 있는 것처럼 하였습니다.
+
+### 실행 방법
+
+input 창을 클릭하시고 원하시는 단어 입력 후 엔터 키를 누르시면 태그가 생깁니다.
+태그를 없애고 싶으시면 x 버튼을 누르시면 됩니다.
+<img src="https://user-images.githubusercontent.com/36434219/151896791-623db991-583c-49db-9ad6-a29b00b3bc47.gif">

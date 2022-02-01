@@ -4,6 +4,7 @@ import MouseCircle from "./component/common/MouseCircle";
 import Tab from "./component/Tab";
 import Toggle from "./component/Toggle";
 import Tag from "./component/Tag";
+import AutoComplete from "./component/AutoComplete";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
       <Modal modalText="wassssssssssup!" outsideClose={true} />
       <Tab tabColor="purple" />
       <Tag />
+      <AutoComplete />
     </>
   );
 }
