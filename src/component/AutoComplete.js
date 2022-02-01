@@ -1,8 +1,278 @@
-import React from "react";
+import React, { useRef, useState } from "react";
+import styled from "styled-components";
 import Wrapper from "./common/Wrapper";
+import { v4 as uuid } from "uuid";
 
-function AutoComplete() {
-  return <Wrapper title="AutoComplete"></Wrapper>;
+// Top 100 films as rated by IMDb users. http://www.imdb.com/chart/top
+const TOP_100_MOVIES = [
+  { label: "The Shawshank Redemption", year: 1994 },
+  { label: "The Godfather", year: 1972 },
+  { label: "The Godfather: Part II", year: 1974 },
+  { label: "The Dark Knight", year: 2008 },
+  { label: "12 Angry Men", year: 1957 },
+  { label: "Schindler's List", year: 1993 },
+  { label: "Pulp Fiction", year: 1994 },
+  {
+    label: "The Lord of the Rings: The Return of the King",
+    year: 2003,
+  },
+  { label: "The Good, the Bad and the Ugly", year: 1966 },
+  { label: "Fight Club", year: 1999 },
+  {
+    label: "The Lord of the Rings: The Fellowship of the Ring",
+    year: 2001,
+  },
+  {
+    label: "Star Wars: Episode V - The Empire Strikes Back",
+    year: 1980,
+  },
+  { label: "Forrest Gump", year: 1994 },
+  { label: "Inception", year: 2010 },
+  {
+    label: "The Lord of the Rings: The Two Towers",
+    year: 2002,
+  },
+  { label: "One Flew Over the Cuckoo's Nest", year: 1975 },
+  { label: "Goodfellas", year: 1990 },
+  { label: "The Matrix", year: 1999 },
+  { label: "Seven Samurai", year: 1954 },
+  {
+    label: "Star Wars: Episode IV - A New Hope",
+    year: 1977,
+  },
+  { label: "City of God", year: 2002 },
+  { label: "Se7en", year: 1995 },
+  { label: "The Silence of the Lambs", year: 1991 },
+  { label: "It's a Wonderful Life", year: 1946 },
+  { label: "Life Is Beautiful", year: 1997 },
+  { label: "The Usual Suspects", year: 1995 },
+  { label: "Léon: The Professional", year: 1994 },
+  { label: "Spirited Away", year: 2001 },
+  { label: "Saving Private Ryan", year: 1998 },
+  { label: "Once Upon a Time in the West", year: 1968 },
+  { label: "American History X", year: 1998 },
+  { label: "Interstellar", year: 2014 },
+  { label: "Casablanca", year: 1942 },
+  { label: "City Lights", year: 1931 },
+  { label: "Psycho", year: 1960 },
+  { label: "The Green Mile", year: 1999 },
+  { label: "The Intouchables", year: 2011 },
+  { label: "Modern Times", year: 1936 },
+  { label: "Raiders of the Lost Ark", year: 1981 },
+  { label: "Rear Window", year: 1954 },
+  { label: "The Pianist", year: 2002 },
+  { label: "The Departed", year: 2006 },
+  { label: "Terminator 2: Judgment Day", year: 1991 },
+  { label: "Back to the Future", year: 1985 },
+  { label: "Whiplash", year: 2014 },
+  { label: "Gladiator", year: 2000 },
+  { label: "Memento", year: 2000 },
+  { label: "The Prestige", year: 2006 },
+  { label: "The Lion King", year: 1994 },
+  { label: "Apocalypse Now", year: 1979 },
+  { label: "Alien", year: 1979 },
+  { label: "Sunset Boulevard", year: 1950 },
+  {
+    label:
+      "Dr. Strangelove or: How I Learned to Stop Worrying and Love the Bomb",
+    year: 1964,
+  },
+  { label: "The Great Dictator", year: 1940 },
+  { label: "Cinema Paradiso", year: 1988 },
+  { label: "The Lives of Others", year: 2006 },
+  { label: "Grave of the Fireflies", year: 1988 },
+  { label: "Paths of Glory", year: 1957 },
+  { label: "Django Unchained", year: 2012 },
+  { label: "The Shining", year: 1980 },
+  { label: "WALL·E", year: 2008 },
+  { label: "American Beauty", year: 1999 },
+  { label: "The Dark Knight Rises", year: 2012 },
+  { label: "Princess Mononoke", year: 1997 },
+  { label: "Aliens", year: 1986 },
+  { label: "Oldboy", year: 2003 },
+  { label: "Once Upon a Time in America", year: 1984 },
+  { label: "Witness for the Prosecution", year: 1957 },
+  { label: "Das Boot", year: 1981 },
+  { label: "Citizen Kane", year: 1941 },
+  { label: "North by Northwest", year: 1959 },
+  { label: "Vertigo", year: 1958 },
+  {
+    label: "Star Wars: Episode VI - Return of the Jedi",
+    year: 1983,
+  },
+  { label: "Reservoir Dogs", year: 1992 },
+  { label: "Braveheart", year: 1995 },
+  { label: "M", year: 1931 },
+  { label: "Requiem for a Dream", year: 2000 },
+  { label: "Amélie", year: 2001 },
+  { label: "A Clockwork Orange", year: 1971 },
+  { label: "Like Stars on Earth", year: 2007 },
+  { label: "Taxi Driver", year: 1976 },
+  { label: "Lawrence of Arabia", year: 1962 },
+  { label: "Double Indemnity", year: 1944 },
+  {
+    label: "Eternal Sunshine of the Spotless Mind",
+    year: 2004,
+  },
+  { label: "Amadeus", year: 1984 },
+  { label: "To Kill a Mockingbird", year: 1962 },
+  { label: "Toy Story 3", year: 2010 },
+  { label: "Logan", year: 2017 },
+  { label: "Full Metal Jacket", year: 1987 },
+  { label: "Dangal", year: 2016 },
+  { label: "The Sting", year: 1973 },
+  { label: "2001: A Space Odyssey", year: 1968 },
+  { label: "Singin' in the Rain", year: 1952 },
+  { label: "Toy Story", year: 1995 },
+  { label: "Bicycle Thieves", year: 1948 },
+  { label: "The Kid", year: 1921 },
+  { label: "Inglourious Basterds", year: 2009 },
+  { label: "Snatch", year: 2000 },
+  { label: "3 Idiots", year: 2009 },
+  { label: "Monty Python and the Holy Grail", year: 1975 },
+];
+
+const Container = styled.div`
+  margin: auto;
+  width: 50%;
+`;
+
+const Box = styled.div`
+  display: flex;
+`;
+
+const Input = styled.input`
+  overflow: hidden;
+  float: left;
+  width: 100%;
+  height: 52px;
+  padding: 10px;
+  flex-shrink: 0;
+  font-size: 15px;
+  cursor: default;
+  border: 1px solid #e3e3e3;
+  border-radius: 17px;
+
+  ${(props) =>
+    props.count === 0 || !props.focus
+      ? `
+      &: focus {
+        box-shadow: 0 5px 4px -2px #dbdbdb;
+      }
+      `
+      : `
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+  `}
+
+  &:focus {
+    outline: none;
+  }
+`;
+
+const Xbutton = styled.span`
+  position: relative;
+  right: 20px;
+  top: -1px;
+  width: 10px;
+  height: 14px;
+  margin: auto;
+  font-size: 15px;
+  color: #050505;
+  cursor: pointer;
+  background-color: #fff;
+`;
+
+const List = styled.ul`
+  margin: 0 auto;
+  padding: 5px 0;
+  width: 100%;
+  border: 1px solid #e3e3e3;
+  border-top: none;
+  box-shadow: 0 5px 4px -2px #dbdbdb;
+  border-bottom-right-radius: 17px;
+  border-bottom-left-radius: 17px;
+  display: ${(props) => (props.count === 0 || !props.focus ? "none" : "block")};
+`;
+
+const Data = styled.li`
+  padding: 3px 10px;
+  text-align: left;
+
+  &:hover {
+    background-color: #eeeeee;
+  }
+`;
+
+function AutoComplete({ WordList = TOP_100_MOVIES }) {
+  const input = useRef();
+  const xButton = useRef();
+  const [focus, setFocus] = useState(false);
+  const [value, setValue] = useState("");
+  const [wordList, setWordList] = useState([]);
+
+  const onClick = () => {
+    setValue("");
+    setWordList([]);
+  };
+
+  const onChange = (event) => {
+    const {
+      target: { value },
+    } = event;
+
+    if (value.trim() === "") {
+      setWordList([]);
+    } else {
+      const newList = WordList.filter((word) =>
+        word.label.toLowerCase().includes(value.toLowerCase())
+      );
+      setWordList(newList);
+    }
+
+    setValue(value);
+  };
+
+  const inputWord = (word) => {
+    setValue(word);
+  };
+
+  const onFocus = () => {
+    setFocus(true);
+  };
+
+  const onBlur = () => {
+    setFocus(false);
+  };
+
+  return (
+    <Wrapper title="AutoComplete">
+      <Container>
+        <Box>
+          <Input
+            ref={input}
+            type="text"
+            onChange={onChange}
+            onFocus={onFocus}
+            onBlur={onBlur}
+            value={value}
+            count={wordList.length}
+            focus={focus}
+          />
+          <Xbutton ref={xButton} onClick={onClick}>
+            x
+          </Xbutton>
+        </Box>
+        <List count={wordList.length} focus={focus}>
+          {wordList.map((word) => (
+            <Data key={uuid()} onClick={() => inputWord(word.label)}>
+              {word.label}
+            </Data>
+          ))}
+        </List>
+      </Container>
+    </Wrapper>
+  );
 }
 
 export default AutoComplete;

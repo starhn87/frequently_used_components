@@ -1,7 +1,6 @@
 # 원티드 프리온보딩 프론트엔드 코스 사전과제
 
 <br>
-<br>
 
 ## 공통. Wrapper
 
@@ -129,3 +128,7 @@ input 창 안에 어떻게 태그를 넣는 과정에서 난관을 겪었습니�
 input 창을 클릭하시고 원하시는 단어 입력 후 엔터 키를 누르시면 태그가 생깁니다.
 태그를 없애고 싶으시면 x 버튼을 누르시면 됩니다.
 <img src="https://user-images.githubusercontent.com/36434219/151896791-623db991-583c-49db-9ad6-a29b00b3bc47.gif">
+<br>
+<br>
+
+## 5. AutoComplete
