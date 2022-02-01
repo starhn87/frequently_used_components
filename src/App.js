@@ -5,6 +5,7 @@ import Tab from "./component/Tab";
 import Toggle from "./component/Toggle";
 import Tag from "./component/Tag";
 import AutoComplete from "./component/AutoComplete";
+import ClickToEdit from "./component/ClickToEdit";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
       <Tab tabColor="purple" />
       <Tag />
       <AutoComplete />
+      <ClickToEdit />
     </>
   );
 }

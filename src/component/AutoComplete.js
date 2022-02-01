@@ -133,6 +133,7 @@ const TOP_100_MOVIES = [
 ];
 
 const Container = styled.div`
+  position: relative;
   margin: auto;
   width: 50%;
 `;
@@ -184,15 +185,19 @@ const Xbutton = styled.span`
 `;
 
 const List = styled.ul`
+  position: absolute;
+  display: ${(props) => (props.count === 0 ? "none" : "block")};
+  overflow-y: scroll;
+  width: 100%;
+  max-height: 200px;
   margin: 0 auto;
   padding: 5px 0;
-  width: 100%;
   border: 1px solid #e3e3e3;
   border-top: none;
   box-shadow: 0 5px 4px -2px #dbdbdb;
   border-bottom-right-radius: 17px;
   border-bottom-left-radius: 17px;
-  display: ${(props) => (props.count === 0 ? "none" : "block")};
+  z-index: 1;
 `;
 
 const Data = styled.li`
