@@ -184,20 +184,23 @@ const Xbutton = styled.span`
   background-color: #fff;
 `;
 
-const List = styled.ul`
+const Div = styled.div`
   position: absolute;
   display: ${(props) => (props.count === 0 ? "none" : "block")};
-  overflow-y: scroll;
+  overflow: hidden;
   width: 100%;
-  max-height: 200px;
-  margin: 0 auto;
-  padding: 5px 0;
   border: 1px solid #e3e3e3;
   border-top: none;
-  box-shadow: 0 5px 4px -2px #dbdbdb;
   border-bottom-right-radius: 17px;
   border-bottom-left-radius: 17px;
+  box-shadow: 0 5px 4px -2px #dbdbdb;
   z-index: 1;
+`;
+
+const List = styled.ul`
+  overflow-y: auto;
+  max-height: 200px;
+  padding: 5px 0;
 `;
 
 const Data = styled.li`
@@ -273,13 +276,15 @@ function AutoComplete({ WordList = TOP_100_MOVIES }) {
             x
           </Xbutton>
         </Box>
-        <List ref={recoList} count={wordList.length}>
-          {wordList.map((word) => (
-            <Data key={uuid()} onClick={() => inputWord(word.label)}>
-              {word.label}
-            </Data>
-          ))}
-        </List>
+        <Div count={wordList.length}>
+          <List ref={recoList}>
+            {wordList.map((word) => (
+              <Data key={uuid()} onClick={() => inputWord(word.label)}>
+                {word.label}
+              </Data>
+            ))}
+          </List>
+        </Div>
       </Container>
     </Wrapper>
   );
