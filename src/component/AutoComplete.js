@@ -174,7 +174,6 @@ const Input = styled.input`
 const Xbutton = styled.span`
   position: relative;
   right: 20px;
-  top: -1px;
   width: 10px;
   height: 14px;
   margin: auto;
