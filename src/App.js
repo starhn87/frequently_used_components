@@ -28,5 +28,4 @@ function App() {
 }
 
 // TODO 탭 css 변경 필요 여부 묾어보기 (설명회)
-// TODO 웹팩 적용
 export default App;
