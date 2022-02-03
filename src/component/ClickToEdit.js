@@ -20,16 +20,26 @@ const Input = styled.input`
   padding: 10px;
 `;
 
-function ClickToEdit() {
-  const [name, setName] = useState("");
-  const [age, setAge] = useState(-1);
+function ClickToEdit({ defaultName = "홍길동", defaultAge = 20 }) {
+  const [name, setName] = useState(defaultName);
+  const [age, setAge] = useState(defaultAge);
+  const [editedName, setEditedName] = useState(defaultName);
+  const [editedAge, setEditedAge] = useState(defaultAge);
+
+  const onChange = (event, setter) => {
+    const {
+      target: { value },
+    } = event;
+
+    setter(value);
+  };
 
   const onBlurName = (event) => {
     const {
       target: { value },
     } = event;
 
-    setName(value);
+    setEditedName(value);
   };
 
   const onBlurAge = (event) => {
@@ -39,13 +49,12 @@ function ClickToEdit() {
 
     if (isNaN(value)) {
       alert("입력값이 올바르지 않습니다.");
-      event.target.value = "";
-      setAge(-1);
+      setAge(editedAge);
       event.target.focus();
       return;
     }
 
-    setAge(value);
+    setEditedAge(value);
   };
 
   return (
@@ -57,15 +66,24 @@ function ClickToEdit() {
             type="text"
             id="username"
             name="username"
+            value={name}
+            onChange={(event) => onChange(event, setName)}
             onBlur={onBlurName}
           />
         </Box>
         <Box>
           <Label htmlFor="age">나이</Label>
-          <Input type="text" id="age" name="age" onBlur={onBlurAge} />
+          <Input
+            type="text"
+            id="age"
+            name="age"
+            value={age}
+            onChange={(event) => onChange(event, setAge)}
+            onBlur={onBlurAge}
+          />
         </Box>
       </Container>
-      <span>{`이름 ${name} 나이 ${age !== -1 ? age : ""}`}</span>
+      <span>{`이름 ${editedName} 나이 ${editedAge}`}</span>
     </Wrapper>
   );
 }
