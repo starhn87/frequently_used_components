@@ -15,7 +15,7 @@ module.exports = {
     autoComplete: BASE_JS + "AutoComplete.js",
     clicktoEdit: BASE_JS + "ClickToEdit.js",
     modal: BASE_JS + "Modal.js",
-    Tab: BASE_JS + "tab.js",
+    Tab: BASE_JS + "Tab.js",
     Tag: BASE_JS + "Tag.js",
     Toggle: BASE_JS + "Toggle.js",
   },
