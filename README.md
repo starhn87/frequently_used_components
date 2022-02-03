@@ -4,8 +4,8 @@
 
 ### 1. Netlify 배포
 
-아래의 URL을 클릭하여 테스트할 수 있습니다.
-https://epic-carson-9ee275.netlify.app/
+- 아래의 URL을 클릭하여 테스트할 수 있습니다.
+- https://epic-carson-9ee275.netlify.app/
 
 ### 2. 로컬 환경
 
@@ -42,6 +42,7 @@ mousedown, mousemove, mouseup 이벤트리스너를 추가하여 마우스를 �
 #### 실행 방법
 
 어플리케이션 실행 후 DOM 안에서 어느 곳을 클릭하던지 해당 기능을 사용하실 수 있습니다.
+<br>
 <img src="https://user-images.githubusercontent.com/36434219/151656821-c5542afa-2834-4b95-be39-6a77603848bc.gif">
 <br>
 <br>
@@ -62,6 +63,7 @@ Props로 defaultChecked, color, disabled을 추가하여 옵션으로 적용할 
 #### 실행 방법
 
 토글 스위치를 클릭하시면 스위치가 토글됩니다.
+<br>
 <img src="https://user-images.githubusercontent.com/36434219/151660862-fbca442b-1d6b-49ed-a1ff-d67d9a8e034c.gif">
 <br>
 <br>
@@ -83,6 +85,7 @@ css 스타일에서 중복되는 코드가 발생하여 Toggle 컴포넌트의 s
 Open Modal 버튼 클릭시 모달이 보여지고 모달의 X 버튼 클릭 혹은 모달 이외의 부분 클릭시 모달이 사라집니다.
 만약, 모달 이외의 부분 클릭시 모달이 사라지게끔 하고 싶다면 outsideClose Prop을 true로 설정하시면 됩니다.
 밑의 예시는 outsideClose를 true로 설정한 경우입니다.
+<br>
 <img src="https://user-images.githubusercontent.com/36434219/151684355-f28f2eaa-c211-4d5f-95b3-fb258ea52afc.gif">
 <br>
 <br>
@@ -105,8 +108,8 @@ TABS_ITEMS 객체의 key 값을 index처럼 사용할 수 있게 두고 selected
 #### 실행 방법
 
 탭을 클릭하시면 활성화되는 탭이 바뀌면서 문구도 바뀌게 됩니다.
-<img src="https://user-images.githubusercontent.com/36434219/151799658-abb8f875-800b-40ac-ad34-64facad4a426.gif">
 <br>
+<img src="https://user-images.githubusercontent.com/36434219/151799658-abb8f875-800b-40ac-ad34-64facad4a426.gif">
 <br>
 <br>
 
@@ -128,6 +131,7 @@ input 안에 어떻게 태그를 넣는 과정에서 난관을 겪었습니다.
 
 input을 클릭하고 원하시는 단어 입력 후 엔터 키를 누르시면 태그가 생깁니다.
 태그를 없애고 싶으시면 x 버튼을 누르시면 됩니다.
+<br>
 <img src="https://user-images.githubusercontent.com/36434219/151896791-623db991-583c-49db-9ad6-a29b00b3bc47.gif">
 <br>
 <br>
@@ -148,6 +152,7 @@ input에 포커스/블러된 경우, 입력 중에 매칭되는 데이터가 있
 
 input을 클릭하고 생각나는 영화를 입력하시면 Top 100과 매칭될 경우 자동 완성된 리스트가 보여지게 됩니다.
 그 중 하나를 클릭하여 자동 완성을 적용할 수 있고 x 버튼을 클릭하여 입력 값을 리셋할 수 있습니다.
+<br>
 <img src="https://user-images.githubusercontent.com/36434219/152119982-c4a0c64f-76da-4953-8010-2de7be37d8e6.gif">
 <br>
 <br>
@@ -170,4 +175,7 @@ name과 age에 default 값을 줄 수 있도록 옵션으로 두었습니다.
 #### 실행 방법
 
 이름 혹은 나이 input을 클릭하여 값을 변경하시고 포커스가 해제되면 아래의 텍스트에 반영되는 것을 볼 수 있습니다.
+<br>
 <img src="https://user-images.githubusercontent.com/36434219/152265873-6af34fc0-60f7-4820-b0ec-b2e598fa5858.gif">
+<br>
+<br>
