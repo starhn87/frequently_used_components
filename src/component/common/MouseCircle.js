@@ -6,7 +6,7 @@ const Circle = styled.div`
   display: none;
   width: 50px;
   height: 50px;
-  /* border: 1px solid black; */
+  border: 1px solid black;
   border-radius: 50px;
   pointer-events: none;
   z-index: 0;
