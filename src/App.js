@@ -1,3 +1,4 @@
+import React from "react";
 import { GlobalStyles } from "./component/common/GlobalStyles";
 import Modal from "./component/Modal";
 import MouseCircle from "./component/common/MouseCircle";

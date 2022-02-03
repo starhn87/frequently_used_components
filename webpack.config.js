@@ -15,9 +15,10 @@ module.exports = {
     autoComplete: BASE_JS + "AutoComplete.js",
     clicktoEdit: BASE_JS + "ClickToEdit.js",
     modal: BASE_JS + "Modal.js",
-    Tab: BASE_JS + "Tab.js",
-    Tag: BASE_JS + "Tag.js",
-    Toggle: BASE_JS + "Toggle.js",
+    tab: BASE_JS + "Tab.js",
+    tag: BASE_JS + "Tag.js",
+    toggle: BASE_JS + "Toggle.js",
+    main: ["./src/App.js", "./src/index.js"],
   },
   mode: process.env.NODE_ENV,
   output: {
@@ -49,6 +50,9 @@ module.exports = {
         ],
       },
     ],
+  },
+  optimization: {
+    minimize: true,
   },
   plugins: [
     new CleanWebpackPlugin(),
