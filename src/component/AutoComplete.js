@@ -83,13 +83,13 @@ const Data = styled.li`
   }
 `;
 
-function AutoComplete({ defaultRecoList, onRecoListChange, WordList }) {
+function AutoComplete({ defaultMatchingList, onMatchingListChange, WordList }) {
   const [value, setValue] = useState("");
-  const [recoList, setRecoList] = useState(defaultRecoList);
+  const [matchingList, setMatchingList] = useState(defaultMatchingList);
 
   const onClick = () => {
     setValue("");
-    setRecoList([]);
+    setMatchingList([]);
   };
 
   const onChange = (event) => {
@@ -98,12 +98,12 @@ function AutoComplete({ defaultRecoList, onRecoListChange, WordList }) {
     } = event;
 
     if (value.trim() === "") {
-      setRecoList([]);
+      setMatchingList([]);
     } else {
       const newList = WordList.filter((word) =>
         word.label.toLowerCase().includes(value.toLowerCase())
       );
-      setRecoList(newList);
+      setMatchingList(newList);
     }
 
     setValue(value);
@@ -114,12 +114,12 @@ function AutoComplete({ defaultRecoList, onRecoListChange, WordList }) {
   };
 
   const handleClick = () => {
-    setRecoList([]);
+    setMatchingList([]);
   };
 
   useEffect(() => {
-    onRecoListChange?.(recoList);
-  }, [recoList, onRecoListChange]);
+    onMatchingListChange?.(matchingList);
+  }, [matchingList, onMatchingListChange]);
 
   useEffect(() => {
     document.addEventListener("click", handleClick);
@@ -127,7 +127,7 @@ function AutoComplete({ defaultRecoList, onRecoListChange, WordList }) {
     return () => {
       document.removeEventListener("click", handleClick);
     };
-  }, [recoList]);
+  }, [matchingList]);
 
   return (
     <Wrapper title="AutoComplete">
@@ -137,14 +137,14 @@ function AutoComplete({ defaultRecoList, onRecoListChange, WordList }) {
             type="text"
             onChange={onChange}
             value={value}
-            count={recoList ? recoList.length : 0}
+            count={matchingList ? matchingList.length : 0}
           />
           <Xbutton onClick={onClick}>x</Xbutton>
         </Box>
-        <Div count={recoList ? recoList.length : 0}>
+        <Div count={matchingList ? matchingList.length : 0}>
           <List>
-            {recoList &&
-              recoList.map((word) => (
+            {matchingList &&
+              matchingList.map((word) => (
                 <Data key={uuid()} onClick={() => inputWord(word.label)}>
                   {word.label}
                 </Data>
@@ -157,13 +157,13 @@ function AutoComplete({ defaultRecoList, onRecoListChange, WordList }) {
 }
 
 AutoComplete.propTypes = {
-  defaultRecoList: PropType.arrayOf(
+  defaultMatchingList: PropType.arrayOf(
     PropType.shape({
       label: PropType.string,
       year: PropType.number,
     })
   ),
-  onRecoListChange: PropType.func,
+  onmatchingListChange: PropType.func,
   WordList: PropType.arrayOf(
     PropType.shape({
       label: PropType.string,
