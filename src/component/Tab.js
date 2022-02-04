@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Wrapper from "./common/Wrapper";
 
@@ -45,8 +45,9 @@ const Desc = styled.p`
 `;
 
 function Tab({
+  defaultTab,
+  onSelectedChange,
   defaultItems = TABS_ITEMS,
-  defaultTab = 0,
   tabColor = "#4800ce",
 }) {
   const [selected, setSelected] = useState(defaultTab);
@@ -54,6 +55,10 @@ function Tab({
   const handleClick = (key) => {
     setSelected(key);
   };
+
+  useEffect(() => {
+    onSelectedChange?.(selected);
+  }, [selected, onSelectedChange]);
 
   return (
     <Wrapper title="Tab">

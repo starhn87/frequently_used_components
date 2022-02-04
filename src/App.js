@@ -1,29 +1,24 @@
 import React from "react";
 import { GlobalStyles } from "./component/common/GlobalStyles";
-import Modal from "./component/Modal";
 import MouseCircle from "./component/common/MouseCircle";
-import Tab from "./component/Tab";
-import Toggle from "./component/Toggle";
-import Tag from "./component/Tag";
-import AutoComplete from "./component/AutoComplete";
-import ClickToEdit from "./component/ClickToEdit";
+import ToggleDemo from "./demo/ToggleDemo";
+import ModalDemo from "./demo/ModalDemo";
+import TabDemo from "./demo/TabDemo";
+import TagDemo from "./demo/TagDemo";
+import ClickToEditDemo from "./demo/ClickToEditDemo";
+import AutoCompleteDemo from "./demo/AutoCompleteDemo";
 
 function App() {
   return (
     <>
       <GlobalStyles />
       <MouseCircle />
-      <Toggle
-        defaultChecked={false}
-        color="blue"
-        disabled={false}
-        switchButtonColor="aliceblue"
-      />
-      <Modal modalText="wassssssssssup!" outsideClose={true} />
-      <Tab tabColor="purple" />
-      <Tag />
-      <AutoComplete />
-      <ClickToEdit />
+      <ToggleDemo />
+      <ModalDemo />
+      <TabDemo />
+      <TagDemo />
+      <AutoCompleteDemo />
+      <ClickToEditDemo />
     </>
   );
 }

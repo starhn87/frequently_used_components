@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Wrapper from "./common/Wrapper";
 
@@ -20,7 +20,7 @@ const Input = styled.input`
   padding: 10px;
 `;
 
-function ClickToEdit({ defaultName = "홍길동", defaultAge = 20 }) {
+function ClickToEdit({ defaultName, defaultAge, onNameChange, onAgeChange }) {
   const [name, setName] = useState(defaultName);
   const [age, setAge] = useState(defaultAge);
   const [editedName, setEditedName] = useState(defaultName);
@@ -57,6 +57,14 @@ function ClickToEdit({ defaultName = "홍길동", defaultAge = 20 }) {
     setEditedAge(value);
   };
 
+  useEffect(() => {
+    onNameChange?.(editedName);
+  }, [editedName, onNameChange]);
+
+  useEffect(() => {
+    onAgeChange?.(editedAge);
+  }, [editedAge, onAgeChange]);
+
   return (
     <Wrapper title={"ClickToEdit"}>
       <Container>
@@ -66,7 +74,7 @@ function ClickToEdit({ defaultName = "홍길동", defaultAge = 20 }) {
             type="text"
             id="username"
             name="username"
-            value={name}
+            value={name || ""}
             onChange={(event) => onChange(event, setName)}
             onBlur={onBlurName}
           />
@@ -77,13 +85,15 @@ function ClickToEdit({ defaultName = "홍길동", defaultAge = 20 }) {
             type="text"
             id="age"
             name="age"
-            value={age}
+            value={age || ""}
             onChange={(event) => onChange(event, setAge)}
             onBlur={onBlurAge}
           />
         </Box>
       </Container>
-      <span>{`이름 ${editedName} 나이 ${editedAge}`}</span>
+      <span>
+        {editedName && editedAge && `이름 ${editedName} 나이 ${editedAge}`}
+      </span>
     </Wrapper>
   );
 }

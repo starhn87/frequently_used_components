@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Wrapper from "./common/Wrapper";
 
@@ -81,15 +81,20 @@ const Explain = styled.div`
 
 function Toggle({
   defaultChecked = false,
+  onCheckedChange,
   color = "#4800ce",
   disabled = false,
   switchButtonColor = "white",
 }) {
   const [checked, setChecked] = useState(defaultChecked);
 
-  const onMouseUp = useCallback(() => {
+  const onMouseUp = () => {
     setChecked(!checked);
-  }, [checked]);
+  };
+
+  useEffect(() => {
+    onCheckedChange?.(checked);
+  }, [checked, onCheckedChange]);
 
   return (
     <Wrapper title="Toggle">

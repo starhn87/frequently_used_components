@@ -60,6 +60,8 @@ const Text = styled.p`
 `;
 
 function Modal({
+  defaultClicked,
+  onClickedChange,
   modalText = "HELLO CODESTATES!",
   modalTextColor = "#4800ce",
   buttonTextColor = "white",
@@ -67,7 +69,7 @@ function Modal({
   outsideClose = false,
 }) {
   const modal = useRef();
-  const [clicked, setClicked] = useState(false);
+  const [clicked, setClicked] = useState(defaultClicked);
 
   const openModal = useCallback(() => {
     if (!clicked) {
@@ -89,6 +91,10 @@ function Modal({
     },
     [closeModal]
   );
+
+  useEffect(() => {
+    onClickedChange?.(clicked);
+  }, [clicked, onClickedChange]);
 
   useEffect(() => {
     if (outsideClose) {

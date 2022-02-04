@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Wrapper from "./common/Wrapper";
 
@@ -60,9 +60,9 @@ const Xbutton = styled.button`
   cursor: pointer;
 `;
 
-function Tag({ tagColor = "#4800ce" }) {
+function Tag({ defaultTags, onTagsChange, tagColor = "#4800ce" }) {
+  const [tags, setTags] = useState(defaultTags);
   const [value, setValue] = useState("");
-  const [tags, setTags] = useState([]);
   const [focus, setFocus] = useState(false);
 
   const handleKeyPress = (event) => {
@@ -103,6 +103,10 @@ function Tag({ tagColor = "#4800ce" }) {
   const onBlur = () => {
     setFocus(false);
   };
+
+  useEffect(() => {
+    onTagsChange?.(tags);
+  }, [tags, onTagsChange]);
 
   return (
     <Wrapper title="Tag">
