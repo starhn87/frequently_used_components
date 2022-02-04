@@ -1,14 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import Wrapper from "./common/Wrapper";
-
-const Container = styled.div`
-  display: block;
-  padding-bottom: 50px;
-`;
 
 const Box = styled.div`
-  padding: 20px;
+  padding: 10px;
 `;
 
 const Label = styled.label`
@@ -20,81 +14,24 @@ const Input = styled.input`
   padding: 10px;
 `;
 
-function ClickToEdit({ defaultName, defaultAge, onNameChange, onAgeChange }) {
-  const [name, setName] = useState(defaultName);
-  const [age, setAge] = useState(defaultAge);
-  const [editedName, setEditedName] = useState(defaultName);
-  const [editedAge, setEditedAge] = useState(defaultAge);
+function ClickToEdit({ title, name, value, onChange }) {
+  const [editingValue, setEditingValue] = useState(value);
 
-  const onChange = (event, setter) => {
-    const {
-      target: { value },
-    } = event;
-
-    setter(value);
+  const onBlur = () => {
+    onChange(editingValue);
   };
-
-  const onBlurName = (event) => {
-    const {
-      target: { value },
-    } = event;
-
-    setEditedName(value);
-  };
-
-  const onBlurAge = (event) => {
-    const {
-      target: { value },
-    } = event;
-
-    if (isNaN(value)) {
-      alert("입력값이 올바르지 않습니다.");
-      setAge(editedAge);
-      event.target.focus();
-      return;
-    }
-
-    setEditedAge(value);
-  };
-
-  useEffect(() => {
-    onNameChange?.(editedName);
-  }, [editedName, onNameChange]);
-
-  useEffect(() => {
-    onAgeChange?.(editedAge);
-  }, [editedAge, onAgeChange]);
 
   return (
-    <Wrapper title={"ClickToEdit"}>
-      <Container>
-        <Box>
-          <Label htmlFor="username">이름</Label>
-          <Input
-            type="text"
-            id="username"
-            name="username"
-            value={name || ""}
-            onChange={(event) => onChange(event, setName)}
-            onBlur={onBlurName}
-          />
-        </Box>
-        <Box>
-          <Label htmlFor="age">나이</Label>
-          <Input
-            type="text"
-            id="age"
-            name="age"
-            value={age || ""}
-            onChange={(event) => onChange(event, setAge)}
-            onBlur={onBlurAge}
-          />
-        </Box>
-      </Container>
-      <span>
-        {editedName && editedAge && `이름 ${editedName} 나이 ${editedAge}`}
-      </span>
-    </Wrapper>
+    <Box>
+      <Label htmlFor="username">{title}</Label>
+      <Input
+        type="text"
+        name={name}
+        value={editingValue}
+        onChange={(event) => setEditingValue(event.target.value)}
+        onBlur={onBlur}
+      />
+    </Box>
   );
 }
 

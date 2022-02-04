@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import Wrapper from "./common/Wrapper";
 import { v4 as uuid } from "uuid";
 import PropType from "prop-types";
 
@@ -83,13 +82,13 @@ const Data = styled.li`
   }
 `;
 
-function AutoComplete({ defaultMatchingList, onMatchingListChange, WordList }) {
+function AutoComplete({ matchingList, onMatchingListChange, WordList }) {
   const [value, setValue] = useState("");
-  const [matchingList, setMatchingList] = useState(defaultMatchingList);
+  const recoList = useRef();
 
   const onClick = () => {
     setValue("");
-    setMatchingList([]);
+    onMatchingListChange([]);
   };
 
   const onChange = (event) => {
@@ -101,48 +100,65 @@ function AutoComplete({ defaultMatchingList, onMatchingListChange, WordList }) {
       word.label.toLowerCase().includes(value.toLowerCase())
     );
 
-    setMatchingList(newList);
+    onMatchingListChange(newList);
     setValue(value);
   };
 
   const inputWord = (word) => {
     setValue(word);
-    setMatchingList([]);
+    onMatchingListChange([]);
   };
+
+  const handleClick = useCallback(
+    (event) => {
+      if (event.target === recoList) {
+        return;
+      }
+
+      onMatchingListChange([]);
+    },
+    [onMatchingListChange]
+  );
 
   useEffect(() => {
     onMatchingListChange?.(matchingList);
   }, [matchingList, onMatchingListChange]);
 
+  useEffect(() => {
+    document.addEventListener("click", handleClick);
+
+    return () => {
+      document.removeEventListener("click", handleClick);
+    };
+  }, [handleClick]);
+
   return (
-    <Wrapper title="AutoComplete">
-      <Container>
-        <Box>
-          <Input
-            type="text"
-            onChange={onChange}
-            value={value}
-            count={matchingList ? matchingList.length : 0}
-          />
-          <Xbutton onClick={onClick}>x</Xbutton>
-        </Box>
-        <Div count={matchingList ? matchingList.length : 0}>
-          <List>
-            {matchingList &&
-              matchingList.map((word) => (
-                <Data key={uuid()} onClick={() => inputWord(word.label)}>
-                  {word.label}
-                </Data>
-              ))}
-          </List>
-        </Div>
-      </Container>
-    </Wrapper>
+    <Container>
+      <Box>
+        <Input
+          type="text"
+          onChange={onChange}
+          value={value}
+          count={matchingList ? matchingList.length : 0}
+        />
+        <Xbutton onClick={onClick}>x</Xbutton>
+      </Box>
+      <Div ref={recoList} count={matchingList ? matchingList.length : 0}>
+        <List>
+          {matchingList &&
+            matchingList.map((word) => (
+              <Data key={uuid()} onClick={() => inputWord(word.label)}>
+                {word.label}
+              </Data>
+            ))}
+        </List>
+      </Div>
+    </Container>
   );
 }
 
 AutoComplete.propTypes = {
-  defaultMatchingList: PropType.arrayOf(
+  matchingList: PropType.arrayOf(
     PropType.shape({
       label: PropType.string,
       year: PropType.number,

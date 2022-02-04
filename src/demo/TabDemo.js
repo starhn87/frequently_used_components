@@ -1,19 +1,18 @@
 import React, { useState } from "react";
+import Wrapper from "../component/common/Wrapper";
 import Tab from "../component/Tab";
 
 function TabDemo() {
   const [selected, setSelected] = useState(0);
 
-  const onSelectedChange = (newSelected) => {
+  const onChange = (newSelected) => {
     setSelected(newSelected);
   };
 
   return (
-    <Tab
-      defaultTab={selected}
-      onSelectedChange={onSelectedChange}
-      tabColor="purple"
-    />
+    <Wrapper title="Tab">
+      <Tab value={selected} onChange={onChange} tabColor="purple" />
+    </Wrapper>
   );
 }
 

@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import AutoComplete from "../component/AutoComplete";
-import PropType from "prop-types";
+import Wrapper from "../component/common/Wrapper";
 
 // Top 100 films as rated by IMDb users. http://www.imdb.com/chart/top
 const TOP_100_MOVIES = [
@@ -139,11 +139,13 @@ function AutoCompleteDemo() {
   };
 
   return (
-    <AutoComplete
-      defaultMatchingList={matchingList}
-      onMatchingListChange={onRecoListChange}
-      WordList={TOP_100_MOVIES}
-    />
+    <Wrapper title={"AutoComplete"}>
+      <AutoComplete
+        matchingList={matchingList}
+        onMatchingListChange={onRecoListChange}
+        WordList={TOP_100_MOVIES}
+      />
+    </Wrapper>
   );
 }
 

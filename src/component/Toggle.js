@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styled from "styled-components";
-import Wrapper from "./common/Wrapper";
 
 const Switch = styled.label`
   position: relative;
@@ -80,35 +79,25 @@ const Explain = styled.div`
 `;
 
 function Toggle({
-  defaultChecked = false,
-  onCheckedChange,
+  value,
+  onChange,
   color = "#4800ce",
   disabled = false,
   switchButtonColor = "white",
 }) {
-  const [checked, setChecked] = useState(defaultChecked);
-
-  const onMouseUp = () => {
-    setChecked(!checked);
-  };
-
-  useEffect(() => {
-    onCheckedChange?.(checked);
-  }, [checked, onCheckedChange]);
-
   return (
-    <Wrapper title="Toggle">
+    <>
       <Switch>
-        <Input type="checkbox" checked={checked} readOnly />
+        <Input type="checkbox" checked={value} readOnly />
         <Slider
           color={color}
           disabled={disabled}
           switchButtonColor={switchButtonColor}
-          onMouseUp={onMouseUp}
+          onMouseUp={() => onChange(!value)}
         ></Slider>
       </Switch>
-      <Explain>{`Toggle Switch ${checked ? "ON" : "OFF"}`}</Explain>
-    </Wrapper>
+      <Explain>{`Toggle Switch ${value ? "ON" : "OFF"}`}</Explain>
+    </>
   );
 }
 

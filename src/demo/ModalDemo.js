@@ -1,20 +1,23 @@
 import React, { useState } from "react";
+import Wrapper from "../component/common/Wrapper";
 import Modal from "../component/Modal";
 
 function ModalDemo() {
   const [clicked, setClicked] = useState(false);
 
-  const onClickedChange = (newClicked) => {
+  const onChange = (newClicked) => {
     setClicked(newClicked);
   };
 
   return (
-    <Modal
-      clicked={clicked}
-      onClickedChange={onClickedChange}
-      modalText="wassssssssssup!"
-      outsideClose={true}
-    />
+    <Wrapper title="Modal">
+      <Modal
+        value={clicked}
+        onChange={onChange}
+        modalText="wassssssssssup!"
+        outsideClose={true}
+      />
+    </Wrapper>
   );
 }
 

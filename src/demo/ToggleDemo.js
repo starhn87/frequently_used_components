@@ -1,21 +1,20 @@
 import React, { useState } from "react";
+import Wrapper from "../component/common/Wrapper";
 import Toggle from "../component/Toggle";
 
 function ToggleDemo() {
   const [checked, setChecked] = useState(false);
 
-  const onCheckedChange = (newChecked) => {
-    setChecked(newChecked);
-  };
-
   return (
-    <Toggle
-      defaultChecked={checked}
-      onCheckedChange={onCheckedChange}
-      color="blue"
-      disabled={false}
-      switchButtonColor="aliceblue"
-    />
+    <Wrapper title="Toggle">
+      <Toggle
+        value={checked}
+        onChange={setChecked}
+        color="blue"
+        disabled={false}
+        switchButtonColor="aliceblue"
+      />
+    </Wrapper>
   );
 }
 

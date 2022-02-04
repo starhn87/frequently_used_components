@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Wrapper from "../component/common/Wrapper";
 import Tag from "../component/Tag";
 
 function TagDemo() {
@@ -8,7 +9,11 @@ function TagDemo() {
     setTags(newTag);
   };
 
-  return <Tag defaultTags={tags} onTagsChange={onTagsChange} />;
+  return (
+    <Wrapper title="Tag">
+      <Tag tags={tags} onTagsChange={onTagsChange} />
+    </Wrapper>
+  );
 }
 
 export default TagDemo;

@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styled from "styled-components";
-import Wrapper from "./common/Wrapper";
 
 const TABS_ITEMS = [
   {
@@ -45,37 +44,27 @@ const Desc = styled.p`
 `;
 
 function Tab({
-  defaultTab,
-  onSelectedChange,
+  value,
+  onChange,
   defaultItems = TABS_ITEMS,
   tabColor = "#4800ce",
 }) {
-  const [selected, setSelected] = useState(defaultTab);
-
-  const handleClick = (key) => {
-    setSelected(key);
-  };
-
-  useEffect(() => {
-    onSelectedChange?.(selected);
-  }, [selected, onSelectedChange]);
-
   return (
-    <Wrapper title="Tab">
+    <>
       <TabContrainer>
         {defaultItems.map((tab) => (
           <TabValue
             key={tab.key}
-            onClick={() => handleClick(tab.key)}
-            className={selected === tab.key ? "selected" : ""}
+            onClick={() => onChange(tab.key)}
+            className={value === tab.key ? "selected" : ""}
             tabColor={tabColor}
           >
             {tab.title}
           </TabValue>
         ))}
       </TabContrainer>
-      <Desc>{defaultItems[selected].desc}</Desc>
-    </Wrapper>
+      <Desc>{defaultItems[value].desc}</Desc>
+    </>
   );
 }
 

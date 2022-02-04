@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import Wrapper from "./common/Wrapper";
 
 const Container = styled.div`
   display: flex;
@@ -60,8 +59,7 @@ const Xbutton = styled.button`
   cursor: pointer;
 `;
 
-function Tag({ defaultTags, onTagsChange, tagColor = "#4800ce" }) {
-  const [tags, setTags] = useState(defaultTags);
+function Tag({ tags, onTagsChange, tagColor = "#4800ce" }) {
   const [value, setValue] = useState("");
   const [focus, setFocus] = useState(false);
 
@@ -79,7 +77,7 @@ function Tag({ defaultTags, onTagsChange, tagColor = "#4800ce" }) {
       return;
     }
 
-    setTags([...tags, value]);
+    onTagsChange([...tags, value]);
     setValue("");
   };
 
@@ -93,7 +91,7 @@ function Tag({ defaultTags, onTagsChange, tagColor = "#4800ce" }) {
 
   const onClick = (pickedTag) => {
     const filteredTags = tags.filter((tag) => tag !== pickedTag);
-    setTags(filteredTags);
+    onChange(filteredTags);
   };
 
   const onFocus = () => {
@@ -104,15 +102,11 @@ function Tag({ defaultTags, onTagsChange, tagColor = "#4800ce" }) {
     setFocus(false);
   };
 
-  useEffect(() => {
-    onTagsChange?.(tags);
-  }, [tags, onTagsChange]);
-
   return (
-    <Wrapper title="Tag">
-      <Container focus={focus} tagColor={tagColor}>
-        <TagList>
-          {tags.map((tag) => (
+    <Container focus={focus} tagColor={tagColor}>
+      <TagList>
+        {tags &&
+          tags.map((tag) => (
             <TagBox key={tag} tagColor={tagColor}>
               {tag}
               <Xbutton onClick={() => onClick(tag)} tagColor={tagColor}>
@@ -120,17 +114,16 @@ function Tag({ defaultTags, onTagsChange, tagColor = "#4800ce" }) {
               </Xbutton>
             </TagBox>
           ))}
-        </TagList>
-        <Input
-          placeholder="Press enter to add tags"
-          onKeyPress={handleKeyPress}
-          onFocus={onFocus}
-          onBlur={onBlur}
-          value={value}
-          onChange={onChange}
-        ></Input>
-      </Container>
-    </Wrapper>
+      </TagList>
+      <Input
+        placeholder="Press enter to add tags"
+        onKeyPress={handleKeyPress}
+        onFocus={onFocus}
+        onBlur={onBlur}
+        value={value}
+        onChange={onChange}
+      ></Input>
+    </Container>
   );
 }
 

@@ -1,6 +1,5 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef } from "react";
 import styled from "styled-components";
-import Wrapper from "./common/Wrapper";
 
 const Button = styled.button`
   width: 120px;
@@ -60,8 +59,8 @@ const Text = styled.p`
 `;
 
 function Modal({
-  defaultClicked,
-  onClickedChange,
+  value,
+  onChange,
   modalText = "HELLO CODESTATES!",
   modalTextColor = "#4800ce",
   buttonTextColor = "white",
@@ -69,19 +68,18 @@ function Modal({
   outsideClose = false,
 }) {
   const modal = useRef();
-  const [clicked, setClicked] = useState(defaultClicked);
 
   const openModal = useCallback(() => {
-    if (!clicked) {
-      setClicked(true);
+    if (!value) {
+      onChange(true);
     }
-  }, [clicked]);
+  }, [value, onChange]);
 
   const closeModal = useCallback(() => {
-    if (clicked) {
-      setClicked(false);
+    if (value) {
+      onChange(false);
     }
-  }, [clicked]);
+  }, [value, onChange]);
 
   const outsideCloseModal = useCallback(
     (event) => {
@@ -91,10 +89,6 @@ function Modal({
     },
     [closeModal]
   );
-
-  useEffect(() => {
-    onClickedChange?.(clicked);
-  }, [clicked, onClickedChange]);
 
   useEffect(() => {
     if (outsideClose) {
@@ -109,7 +103,7 @@ function Modal({
   }, [outsideCloseModal, outsideClose]);
 
   return (
-    <Wrapper title="Modal">
+    <>
       <Button
         buttonColor={buttonColor}
         buttonTextColor={buttonTextColor}
@@ -117,7 +111,7 @@ function Modal({
       >
         Open Modal
       </Button>
-      <ModalBox ref={modal} clicked={clicked}>
+      <ModalBox ref={modal} clicked={value}>
         <ModalContent>
           <CloseWrapper>
             <Close onMouseUp={closeModal}>&times;</Close>
@@ -125,7 +119,7 @@ function Modal({
           <Text modalTextColor={modalTextColor}>{modalText}</Text>
         </ModalContent>
       </ModalBox>
-    </Wrapper>
+    </>
   );
 }
 
