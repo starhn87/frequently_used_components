@@ -97,37 +97,22 @@ function AutoComplete({ defaultMatchingList, onMatchingListChange, WordList }) {
       target: { value },
     } = event;
 
-    if (value.trim() === "") {
-      setMatchingList([]);
-    } else {
-      const newList = WordList.filter((word) =>
-        word.label.toLowerCase().includes(value.toLowerCase())
-      );
-      setMatchingList(newList);
-    }
+    const newList = WordList.filter((word) =>
+      word.label.toLowerCase().includes(value.toLowerCase())
+    );
 
+    setMatchingList(newList);
     setValue(value);
   };
 
   const inputWord = (word) => {
     setValue(word);
-  };
-
-  const handleClick = () => {
     setMatchingList([]);
   };
 
   useEffect(() => {
     onMatchingListChange?.(matchingList);
   }, [matchingList, onMatchingListChange]);
-
-  useEffect(() => {
-    document.addEventListener("click", handleClick);
-
-    return () => {
-      document.removeEventListener("click", handleClick);
-    };
-  }, [matchingList]);
 
   return (
     <Wrapper title="AutoComplete">
