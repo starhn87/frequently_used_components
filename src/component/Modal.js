@@ -66,10 +66,7 @@ function Modal({
   buttonColor = "#4800ce",
   outsideClose = false,
 }) {
-  const modalBtn = useRef();
-  const closeBtn = useRef();
   const modal = useRef();
-
   const [clicked, setClicked] = useState(false);
 
   const openModal = useCallback(() => {
@@ -94,39 +91,30 @@ function Modal({
   );
 
   useEffect(() => {
-    const modalBtnCurrent = modalBtn.current;
-    modalBtnCurrent.addEventListener("mouseup", openModal);
-
-    const closeBtnCurrent = closeBtn.current;
-    closeBtnCurrent.addEventListener("mouseup", closeModal);
-
     if (outsideClose) {
       window.addEventListener("mouseup", outsideCloseModal);
     }
 
     return () => {
-      modalBtnCurrent.removeEventListener("mouseup", openModal);
-      closeBtnCurrent.removeEventListener("mouseup", closeModal);
-
       if (outsideClose) {
         window.addEventListener("mouseup", outsideCloseModal);
       }
     };
-  }, [clicked, openModal, closeModal, outsideCloseModal, outsideClose]);
+  }, [outsideCloseModal, outsideClose]);
 
   return (
     <Wrapper title="Modal">
       <Button
-        ref={modalBtn}
         buttonColor={buttonColor}
         buttonTextColor={buttonTextColor}
+        onMouseUp={openModal}
       >
         Open Modal
       </Button>
       <ModalBox ref={modal} clicked={clicked}>
         <ModalContent>
           <CloseWrapper>
-            <Close ref={closeBtn}>&times;</Close>
+            <Close onMouseUp={closeModal}>&times;</Close>
           </CloseWrapper>
           <Text modalTextColor={modalTextColor}>{modalText}</Text>
         </ModalContent>

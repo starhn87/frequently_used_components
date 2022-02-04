@@ -61,7 +61,7 @@ const Xbutton = styled.button`
 `;
 
 function Tag({ tagColor = "#4800ce" }) {
-  const tagBar = useRef();
+  const [value, setValue] = useState("");
   const [tags, setTags] = useState([]);
   const [focus, setFocus] = useState(false);
 
@@ -70,20 +70,25 @@ function Tag({ tagColor = "#4800ce" }) {
       return;
     }
 
-    const tagBarCurrent = tagBar.current;
-    const newTag = tagBarCurrent.value;
-
-    if (tags.includes(newTag)) {
+    if (tags.includes(value)) {
       alert("이미 존재하는 태그입니다.");
-      tagBarCurrent.value = "";
+      setValue("");
       return;
-    } else if (newTag.trim() === "") {
-      tagBarCurrent.value = "";
+    } else if (value.trim() === "") {
+      setValue("");
       return;
     }
 
-    setTags([...tags, newTag]);
-    tagBarCurrent.value = "";
+    setTags([...tags, value]);
+    setValue("");
+  };
+
+  const onChange = (event) => {
+    const {
+      target: { value },
+    } = event;
+
+    setValue(value);
   };
 
   const onClick = (pickedTag) => {
@@ -113,11 +118,12 @@ function Tag({ tagColor = "#4800ce" }) {
           ))}
         </TagList>
         <Input
-          ref={tagBar}
           placeholder="Press enter to add tags"
           onKeyPress={handleKeyPress}
           onFocus={onFocus}
           onBlur={onBlur}
+          value={value}
+          onChange={onChange}
         ></Input>
       </Container>
     </Wrapper>

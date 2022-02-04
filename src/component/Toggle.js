@@ -86,30 +86,20 @@ function Toggle({
   switchButtonColor = "white",
 }) {
   const [checked, setChecked] = useState(defaultChecked);
-  const toggler = useRef();
 
-  const handleClick = useCallback(() => {
+  const onMouseUp = useCallback(() => {
     setChecked(!checked);
   }, [checked]);
-
-  useEffect(() => {
-    const toggleSwitch = toggler.current;
-    toggleSwitch.addEventListener("mouseup", handleClick);
-
-    return () => {
-      toggleSwitch.removeEventListener("mouseup", handleClick);
-    };
-  }, [checked, handleClick]);
 
   return (
     <Wrapper title="Toggle">
       <Switch>
         <Input type="checkbox" checked={checked} readOnly />
         <Slider
-          ref={toggler}
           color={color}
           disabled={disabled}
           switchButtonColor={switchButtonColor}
+          onMouseUp={onMouseUp}
         ></Slider>
       </Switch>
       <Explain>{`Toggle Switch ${checked ? "ON" : "OFF"}`}</Explain>

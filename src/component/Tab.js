@@ -49,7 +49,6 @@ function Tab({
   defaultTab = 0,
   tabColor = "#4800ce",
 }) {
-  const tabContainer = useRef();
   const [selected, setSelected] = useState(defaultTab);
 
   const handleClick = (key) => {
@@ -58,7 +57,7 @@ function Tab({
 
   return (
     <Wrapper title="Tab">
-      <TabContrainer ref={tabContainer}>
+      <TabContrainer>
         {defaultItems.map((tab) => (
           <TabValue
             key={tab.key}

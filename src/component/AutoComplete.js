@@ -212,9 +212,6 @@ const Data = styled.li`
 `;
 
 function AutoComplete({ WordList = TOP_100_MOVIES }) {
-  const input = useRef();
-  const xButton = useRef();
-  const recoList = useRef();
   const [value, setValue] = useState("");
   const [wordList, setWordList] = useState([]);
 
@@ -244,11 +241,7 @@ function AutoComplete({ WordList = TOP_100_MOVIES }) {
     setValue(word);
   };
 
-  const handleClick = (event) => {
-    if (event.target === recoList) {
-      return;
-    }
-
+  const handleClick = () => {
     setWordList([]);
   };
 
@@ -265,18 +258,15 @@ function AutoComplete({ WordList = TOP_100_MOVIES }) {
       <Container>
         <Box>
           <Input
-            ref={input}
             type="text"
             onChange={onChange}
             value={value}
             count={wordList.length}
           />
-          <Xbutton ref={xButton} onClick={onClick}>
-            x
-          </Xbutton>
+          <Xbutton onClick={onClick}>x</Xbutton>
         </Box>
         <Div count={wordList.length}>
-          <List ref={recoList}>
+          <List>
             {wordList.map((word) => (
               <Data key={uuid()} onClick={() => inputWord(word.label)}>
                 {word.label}
