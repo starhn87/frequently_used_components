@@ -91,7 +91,7 @@ function Tag({ tags, onTagsChange, tagColor = "#4800ce" }) {
 
   const onClick = (pickedTag) => {
     const filteredTags = tags.filter((tag) => tag !== pickedTag);
-    onChange(filteredTags);
+    onTagsChange(filteredTags);
   };
 
   const onFocus = () => {
