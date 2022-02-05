@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useRef } from "react";
 import styled from "styled-components";
+import PropType from "prop-types";
 
 const Button = styled.button`
   width: 120px;
@@ -122,5 +123,15 @@ function Modal({
     </>
   );
 }
+
+Modal.propTypes = {
+  value: PropType.bool.isRequired,
+  onChange: PropType.func.isRequired,
+  modalText: PropType.string,
+  modalTextColor: PropType.string,
+  buttonTextColor: PropType.string,
+  buttonColor: PropType.string,
+  outsideClose: PropType.bool,
+};
 
 export default Modal;

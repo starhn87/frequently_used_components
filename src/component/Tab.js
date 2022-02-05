@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import PropType from "prop-types";
 
 const TABS_ITEMS = [
   {
@@ -67,5 +68,12 @@ function Tab({
     </>
   );
 }
+
+Tab.propTypes = {
+  value: PropType.number.isRequired,
+  onChange: PropType.func.isRequired,
+  defaultItems: PropType.object,
+  tabColor: PropType.string,
+};
 
 export default Tab;

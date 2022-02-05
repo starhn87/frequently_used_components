@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import PropType from "prop-types";
 
 const Box = styled.div`
   padding: 30px 30px 40px;
@@ -24,5 +25,10 @@ function Wrapper({ title, children }) {
     </Box>
   );
 }
+
+Wrapper.propTypes = {
+  title: PropType.string.isRequired,
+  children: PropType.node.isRequired,
+};
 
 export default Wrapper;

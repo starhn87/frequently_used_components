@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import PropType from "prop-types";
 
 const Box = styled.div`
   padding: 10px;
@@ -34,5 +35,12 @@ function ClickToEdit({ title, name, value, onChange }) {
     </Box>
   );
 }
+
+ClickToEdit.propTypes = {
+  title: PropType.string.isRequired,
+  name: PropType.string.isRequired,
+  value: PropType.oneOfType([PropType.string, PropType.number]).isRequired,
+  onChange: PropType.func.isRequired,
+};
 
 export default ClickToEdit;

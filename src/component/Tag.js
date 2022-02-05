@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import PropType from "prop-types";
 
 const Container = styled.div`
   display: flex;
@@ -126,5 +127,11 @@ function Tag({ tags, onTagsChange, tagColor = "#4800ce" }) {
     </Container>
   );
 }
+
+Tag.propTypes = {
+  tags: PropType.array.isRequired,
+  onTagsChange: PropType.func.isRequired,
+  tagColor: PropType.string,
+};
 
 export default Tag;

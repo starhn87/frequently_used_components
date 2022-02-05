@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import PropType from "prop-types";
 
 const Switch = styled.label`
   position: relative;
@@ -100,5 +101,13 @@ function Toggle({
     </>
   );
 }
+
+Toggle.propTypes = {
+  value: PropType.bool.isRequired,
+  onChange: PropType.func.isRequired,
+  color: PropType.string,
+  disabled: PropType.bool,
+  switchButtonColor: PropType.string,
+};
 
 export default Toggle;

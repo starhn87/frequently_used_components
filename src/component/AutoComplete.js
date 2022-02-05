@@ -163,14 +163,14 @@ AutoComplete.propTypes = {
       label: PropType.string,
       year: PropType.number,
     })
-  ),
+  ).isRequired,
   onmatchingListChange: PropType.func,
   WordList: PropType.arrayOf(
     PropType.shape({
       label: PropType.string,
       year: PropType.number,
     })
-  ),
+  ).isRequired,
 };
 
 export default AutoComplete;
