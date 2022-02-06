@@ -4,6 +4,10 @@ import PropType from "prop-types";
 
 const Box = styled.div`
   padding: 30px 30px 40px;
+
+  @media only screen and (max-width: 700px) {
+    padding: 30px 20px;
+  }
 `;
 
 const Title = styled.div`

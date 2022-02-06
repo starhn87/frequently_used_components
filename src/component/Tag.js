@@ -99,14 +99,6 @@ function Tag({ tags, onTagsChange, tagColor = "#4800ce" }) {
     onTagsChange(filteredTags);
   };
 
-  const onFocus = () => {
-    setFocus(true);
-  };
-
-  const onBlur = () => {
-    setFocus(false);
-  };
-
   return (
     <Container focus={focus} tagColor={tagColor}>
       <TagList>
@@ -123,8 +115,8 @@ function Tag({ tags, onTagsChange, tagColor = "#4800ce" }) {
       <Input
         placeholder="Press enter to add tags"
         onKeyPress={handleKeyPress}
-        onFocus={onFocus}
-        onBlur={onBlur}
+        onFocus={() => setFocus(true)}
+        onBlur={() => setFocus(false)}
         value={value}
         onChange={onChange}
       ></Input>

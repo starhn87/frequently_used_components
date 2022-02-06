@@ -24,6 +24,10 @@ const TabContrainer = styled.div`
   display: flex;
   width: 50%;
   margin: 0 auto;
+
+  @media only screen and (max-width: 700px) {
+    width: 80%;
+  }
 `;
 
 const TabValue = styled.button`
