@@ -15,6 +15,10 @@ const Title = styled.div`
 const Container = styled.div`
   padding: 80px;
   text-align: center;
+
+  @media only screen and (max-width: 700px) {
+    padding: 0;
+  }
 `;
 
 function Wrapper({ title, children }) {

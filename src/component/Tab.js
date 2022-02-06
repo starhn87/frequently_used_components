@@ -42,6 +42,10 @@ const TabValue = styled.button`
 
 const Desc = styled.p`
   padding-top: 80px;
+
+  @media only screen and (max-width: 700px) {
+    padding-top: 50px;
+  }
 `;
 
 function Tab({

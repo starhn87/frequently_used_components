@@ -17,6 +17,10 @@ const Container = styled.div`
       ? `1px solid ${props.tagColor};
   `
       : "none"};
+
+  @media only screen and (max-width: 700px) {
+    width: 80%;
+  }
 `;
 
 const Input = styled.input`

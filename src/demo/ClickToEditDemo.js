@@ -5,6 +5,10 @@ import Wrapper from "../component/common/Wrapper";
 
 const Container = styled.div`
   padding-top: 50px;
+
+  @media only screen and (max-width: 700px) {
+    padding-top: 35px;
+  }
 `;
 
 const Text = styled.span`

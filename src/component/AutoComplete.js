@@ -7,6 +7,10 @@ const Container = styled.div`
   position: relative;
   margin: auto;
   width: 50%;
+
+  @media only screen and (max-width: 700px) {
+    width: 80%;
+  }
 `;
 
 const Box = styled.div`
@@ -79,6 +83,7 @@ const Data = styled.li`
 
   &:hover {
     background-color: #eeeeee;
+    cursor: default;
   }
 `;
 
