@@ -2,16 +2,6 @@ import React, { useCallback, useEffect, useRef } from "react";
 import styled from "styled-components";
 import PropType from "prop-types";
 
-const Button = styled.button`
-  width: 120px;
-  height: 55px;
-  border-radius: 55px;
-  border-color: transparent;
-  background-color: ${(props) => props.buttonColor};
-  color: ${(props) => props.buttonTextColor};
-  cursor: pointer;
-`;
-
 const ModalBox = styled.div`
   position: fixed;
   overflow: auto;
@@ -55,24 +45,12 @@ const Close = styled.div`
   cursor: pointer;
 `;
 
-function Modal({
-  value,
-  onChange,
-  onValueChange,
-  buttonTextColor = "white",
-  buttonColor = "#4800ce",
-  outsideClose = false,
-}) {
+function Modal({ value, onChange, onValueChange, outsideClose = false }) {
   const modal = useRef();
-
-  const openModal = useCallback(() => {
-    if (!value) {
-      onChange(true);
-    }
-  }, [value, onChange]);
 
   const closeModal = useCallback(() => {
     if (value) {
+      console.log("what?!");
       onChange(false);
     }
   }, [value, onChange]);
@@ -100,13 +78,6 @@ function Modal({
 
   return (
     <>
-      <Button
-        buttonColor={buttonColor}
-        buttonTextColor={buttonTextColor}
-        onMouseUp={openModal}
-      >
-        Open Modal
-      </Button>
       <ModalBox ref={modal} clicked={value}>
         <ModalContent>
           <CloseWrapper>
@@ -123,10 +94,7 @@ Modal.propTypes = {
   value: PropType.bool.isRequired,
   onChange: PropType.func.isRequired,
   onValueChange: PropType.func.isRequired,
-  modalText: PropType.string,
   modalTextColor: PropType.string,
-  buttonTextColor: PropType.string,
-  buttonColor: PropType.string,
   outsideClose: PropType.bool,
 };
 

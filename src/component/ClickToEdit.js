@@ -26,7 +26,7 @@ function ClickToEdit({ title, name, value, onChange }) {
         name={name}
         value={editingValue}
         onChange={(event) => setEditingValue(event.target.value)}
-        onBlur={() => onChange(editingValue)}
+        onBlur={(event) => onChange(editingValue, event)}
       />
     </Box>
   );
