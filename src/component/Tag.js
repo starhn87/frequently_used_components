@@ -110,12 +110,12 @@ function Tag({ value, onChange }) {
           ))}
       </TagList>
       <Input
-        placeholder="Press enter to add tags"
+        value={editingValue}
+        onChange={onValueChange}
         onKeyPress={handleKeyPress}
         onFocus={() => setActive(true)}
         onBlur={() => setActive(false)}
-        value={editingValue}
-        onChange={onValueChange}
+        placeholder="Press enter to add tags"
       ></Input>
     </Container>
   );

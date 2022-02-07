@@ -37,7 +37,6 @@ function TabDemo() {
         value={selected}
         onChange={(key) => setSelected(key)}
         items={TAB_ITEMS}
-        tabColor="purple"
       />
       <Desc>{TAB_ITEMS[selected].desc}</Desc>
     </Wrapper>

@@ -141,8 +141,8 @@ function AutoComplete({ value, onChange, options }) {
       <Box>
         <Input
           type="text"
-          onChange={onEditingValueChange}
           value={editingValue}
+          onChange={onEditingValueChange}
           className={`${value.length > 0 ? "list" : "active"}`}
         />
         <Xbutton onClick={onClick}>x</Xbutton>

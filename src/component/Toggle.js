@@ -69,8 +69,8 @@ function Toggle({ value, onChange, disabled = false }) {
     <Switch>
       <Input type="checkbox" className={`${value ? "active" : ""}`} readOnly />
       <Slider
-        className={`${disabled ? "disabled" : ""}`}
         onMouseUp={() => onChange(!value)}
+        className={`${disabled ? "disabled" : ""}`}
       ></Slider>
     </Switch>
   );
