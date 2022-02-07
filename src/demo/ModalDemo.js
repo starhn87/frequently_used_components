@@ -8,8 +8,8 @@ const Button = styled.button`
   height: 55px;
   border-radius: 55px;
   border-color: transparent;
-  background-color: ${(props) => props.buttonColor};
-  color: ${(props) => props.buttonTextColor};
+  background-color: #4800ce;
+  color: white;
   cursor: pointer;
 `;
 
@@ -28,13 +28,7 @@ function ModalDemo() {
 
   return (
     <Wrapper title="Modal">
-      <Button
-        buttonColor={"#4800ce"}
-        buttonTextColor={"white"}
-        onMouseUp={openModal}
-      >
-        Open Modal
-      </Button>
+      <Button onMouseUp={openModal}>Open Modal</Button>
       <Modal
         value={value}
         onChange={onChange}

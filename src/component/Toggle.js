@@ -16,25 +16,17 @@ const Slider = styled.span`
   right: 0;
   bottom: 0;
   background: #c5c5c5;
-  background: linear-gradient(
-      to left,
-      #c5c5c5 50%,
-      ${(props) => props.color} 50%
-    )
-    right;
+  background: linear-gradient(to left, #c5c5c5 50%, #4800ce 50%) right;
   background-size: 200%;
   border-radius: 34px;
   transition: 0.5s;
   -webkit-transition: 0.5s;
   cursor: pointer;
 
-  ${(props) =>
-    props.disabled
-      ? `
-  opacity: 0.3;
-  pointer-events: none;
-  `
-      : ""}
+  &.disabled {
+    opacity: 0.3;
+    pointer-events: none;
+  }
 
   &:before {
     position: absolute;
@@ -42,7 +34,7 @@ const Slider = styled.span`
     bottom: 4px;
     height: 26px;
     width: 26px;
-    background-color: ${(props) => props.switchButtonColor};
+    background-color: white;
     border-radius: 50%;
     content: "";
     -webkit-transition: 0.5s;
@@ -55,40 +47,29 @@ const Input = styled.input`
   height: 0;
   opacity: 0;
 
-  ${(props) =>
-    props.checked
-      ? `
+  &.active {
     & + ${Slider} {
       background-position: left;
 
       &:before {
-      -webkit-transform: translateX(45px);
-      -ms-transform: translateX(45px);
-      transform: translateX(45px);
+        -webkit-transform: translateX(45px);
+        -ms-transform: translateX(45px);
+        transform: translateX(45px);
       }
     }
-  `
-      : ""}
+  }
 
   &:focus + ${Slider} {
     box-shadow: 0 0 1px #2196f3;
   }
 `;
 
-function Toggle({
-  value,
-  onChange,
-  color = "#4800ce",
-  disabled = false,
-  switchButtonColor = "white",
-}) {
+function Toggle({ value, onChange, disabled = false }) {
   return (
     <Switch>
-      <Input type="checkbox" checked={value} readOnly />
+      <Input type="checkbox" className={`${value ? "active" : ""}`} readOnly />
       <Slider
-        color={color}
-        disabled={disabled}
-        switchButtonColor={switchButtonColor}
+        className={`${disabled ? "disabled" : ""}`}
         onMouseUp={() => onChange(!value)}
       ></Slider>
     </Switch>
@@ -98,9 +79,7 @@ function Toggle({
 Toggle.propTypes = {
   value: PropType.bool.isRequired,
   onChange: PropType.func.isRequired,
-  color: PropType.string,
   disabled: PropType.bool,
-  switchButtonColor: PropType.string,
 };
 
 export default Toggle;

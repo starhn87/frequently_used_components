@@ -5,6 +5,7 @@ import PropType from "prop-types";
 const ModalBox = styled.div`
   position: fixed;
   overflow: auto;
+  display: none;
   top: 0;
   left: 0;
   width: 100%;
@@ -12,12 +13,9 @@ const ModalBox = styled.div`
   z-index: 1;
   background-color: rgba(0, 0, 0, 0.4);
 
-  ${(props) =>
-    props.clicked
-      ? `
-        display: block;
-    `
-      : "display: none;"}
+  &.active {
+    display: block;
+  }
 `;
 
 const ModalContent = styled.div`
@@ -46,8 +44,7 @@ const Close = styled.div`
 `;
 
 const ModalText = styled.p`
-  color: ${(props) =>
-    props.modalTextColor ? props.modalTextColor : "#4800ce"};
+  color: #4800ce;
 `;
 
 function Modal({ value, onChange, content, outsideClose = false }) {
@@ -81,7 +78,7 @@ function Modal({ value, onChange, content, outsideClose = false }) {
   }, [outsideCloseModal, outsideClose]);
 
   return (
-    <ModalBox ref={modal} clicked={value}>
+    <ModalBox ref={modal} className={`${value ? "active" : ""}`}>
       <ModalContent>
         <CloseWrapper>
           <Close onMouseUp={closeModal}>&times;</Close>

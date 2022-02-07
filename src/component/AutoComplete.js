@@ -29,17 +29,16 @@ const Input = styled.input`
   border: 1px solid #e3e3e3;
   border-radius: 17px;
 
-  ${(props) =>
-    props.count === 0
-      ? `
-      &: focus {
-        box-shadow: 0 5px 4px -2px #dbdbdb;
-      }
-      `
-      : `
-      border-bottom-left-radius: 0;
-      border-bottom-right-radius: 0;
-  `}
+  &.list {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  &.active {
+    &:focus {
+      box-shadow: 0 5px 4px -2px #dbdbdb;
+    }
+  }
 
   &:focus {
     outline: none;
@@ -60,7 +59,7 @@ const Xbutton = styled.span`
 
 const Div = styled.div`
   position: absolute;
-  display: ${(props) => (props.count === 0 ? "none" : "block")};
+  display: none;
   overflow: hidden;
   width: 100%;
   border: 1px solid #e3e3e3;
@@ -69,6 +68,10 @@ const Div = styled.div`
   border-bottom-left-radius: 17px;
   box-shadow: 0 5px 4px -2px #dbdbdb;
   background-color: white;
+
+  &.list {
+    display: block;
+  }
 `;
 
 const List = styled.ul`
@@ -140,11 +143,15 @@ function AutoComplete({ value, onChange, options }) {
           type="text"
           onChange={onEditingValueChange}
           value={editingValue}
-          count={value ? value.length : 0}
+          className={`${value.length > 0 ? "list" : "active"}`}
         />
         <Xbutton onClick={onClick}>x</Xbutton>
       </Box>
-      <Div ref={autoComplete} count={value ? value.length : 0}>
+      <Div
+        ref={autoComplete}
+        count={value ? value.length : 0}
+        className={`${value.length > 0 ? "list" : ""}`}
+      >
         <List>
           {value &&
             value.map((word) => (

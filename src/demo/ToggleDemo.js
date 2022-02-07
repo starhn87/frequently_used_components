@@ -12,13 +12,7 @@ function ToggleDemo() {
 
   return (
     <Wrapper title="Toggle">
-      <Toggle
-        value={value}
-        onChange={setValue}
-        color="blue"
-        disabled={false}
-        switchButtonColor="aliceblue"
-      />
+      <Toggle value={value} onChange={setValue} disabled={false} />
       <Explain>{`Toggle Switch ${value ? "ON" : "OFF"}`}</Explain>
     </Wrapper>
   );

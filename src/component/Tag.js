@@ -11,12 +11,11 @@ const Container = styled.div`
   border: 1px solid #e3e3e3;
   border-radius: 10px;
   overflow: hidden;
+  outline: none;
 
-  outline: ${(props) =>
-    props.focus
-      ? `1px solid ${props.tagColor};
-  `
-      : "none"};
+  &.active {
+    outline: 1px solid #4800ce;
+  }
 
   @media only screen and (max-width: 700px) {
     width: 80%;
@@ -33,7 +32,7 @@ const TagBox = styled.li`
   margin: 0 5px;
   padding: 8px 8px 7px;
   align-items: center;
-  background-color: ${(props) => props.tagColor};
+  background-color: #4800ce;
   color: white;
   border-radius: 8px;
   white-space: pre;
@@ -48,7 +47,7 @@ const Xbutton = styled.button`
   border-radius: 50%;
   line-height: 0;
   background-color: white;
-  color: ${(props) => props.tagColor};
+  color: #4800ce;
   cursor: pointer;
 `;
 
@@ -64,9 +63,9 @@ const Input = styled.input`
   }
 `;
 
-function Tag({ value, onChange, tagColor = "#4800ce" }) {
+function Tag({ value, onChange }) {
   const [editingValue, setEditingValue] = useState("");
-  const [focus, setFocus] = useState(false);
+  const [active, setActive] = useState(false);
 
   const onClick = (pickedTag) => {
     const filteredTags = value.filter((tag) => tag !== pickedTag);
@@ -100,23 +99,21 @@ function Tag({ value, onChange, tagColor = "#4800ce" }) {
   };
 
   return (
-    <Container focus={focus} tagColor={tagColor}>
+    <Container className={`${active ? "active" : ""}`}>
       <TagList>
         {value &&
           value.map((tag) => (
-            <TagBox key={tag} tagColor={tagColor}>
+            <TagBox key={tag}>
               {tag}
-              <Xbutton onClick={() => onClick(tag)} tagColor={tagColor}>
-                x
-              </Xbutton>
+              <Xbutton onClick={() => onClick(tag)}>x</Xbutton>
             </TagBox>
           ))}
       </TagList>
       <Input
         placeholder="Press enter to add tags"
         onKeyPress={handleKeyPress}
-        onFocus={() => setFocus(true)}
-        onBlur={() => setFocus(false)}
+        onFocus={() => setActive(true)}
+        onBlur={() => setActive(false)}
         value={editingValue}
         onChange={onValueChange}
       ></Input>
@@ -127,7 +124,6 @@ function Tag({ value, onChange, tagColor = "#4800ce" }) {
 Tag.propTypes = {
   value: PropType.arrayOf(PropType.string),
   onChange: PropType.func.isRequired,
-  tagColor: PropType.string,
 };
 
 export default Tag;

@@ -21,12 +21,12 @@ const TabValue = styled.button`
   transition: 0.3s;
 
   &.selected {
-    background-color: ${(props) => props.tabColor};
+    background-color: #4800ce;
     color: white;
   }
 `;
 
-function Tab({ value, onChange, items, tabColor = "#4800ce" }) {
+function Tab({ value, onChange, items }) {
   return (
     <>
       <TabContrainer>
@@ -35,7 +35,6 @@ function Tab({ value, onChange, items, tabColor = "#4800ce" }) {
             key={tab.key}
             onClick={() => onChange(tab.key)}
             className={value === tab.key ? "selected" : ""}
-            tabColor={tabColor}
           >
             {tab.title}
           </TabValue>
@@ -56,7 +55,6 @@ Tab.propTypes = {
       onClick: PropType.func,
     })
   ),
-  tabColor: PropType.string,
 };
 
 export default Tab;
