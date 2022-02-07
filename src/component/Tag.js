@@ -23,18 +23,6 @@ const Container = styled.div`
   }
 `;
 
-const Input = styled.input`
-  width: 100%;
-  height: 100%;
-  padding: 5px;
-  font-size: 15px;
-  border: none;
-
-  &:focus {
-    outline: none;
-  }
-`;
-
 const TagList = styled.ul`
   display: flex;
   align-items: center;
@@ -64,9 +52,34 @@ const Xbutton = styled.button`
   cursor: pointer;
 `;
 
+const Input = styled.input`
+  width: 100%;
+  height: 100%;
+  padding: 5px;
+  font-size: 15px;
+  border: none;
+
+  &:focus {
+    outline: none;
+  }
+`;
+
 function Tag({ tags, onTagsChange, tagColor = "#4800ce" }) {
   const [value, setValue] = useState("");
   const [focus, setFocus] = useState(false);
+
+  const onClick = (pickedTag) => {
+    const filteredTags = tags.filter((tag) => tag !== pickedTag);
+    onTagsChange(filteredTags);
+  };
+
+  const onChange = (event) => {
+    const {
+      target: { value },
+    } = event;
+
+    setValue(value);
+  };
 
   const handleKeyPress = (event) => {
     if (event.key !== "Enter") {
@@ -84,19 +97,6 @@ function Tag({ tags, onTagsChange, tagColor = "#4800ce" }) {
 
     onTagsChange([...tags, value]);
     setValue("");
-  };
-
-  const onChange = (event) => {
-    const {
-      target: { value },
-    } = event;
-
-    setValue(value);
-  };
-
-  const onClick = (pickedTag) => {
-    const filteredTags = tags.filter((tag) => tag !== pickedTag);
-    onTagsChange(filteredTags);
   };
 
   return (

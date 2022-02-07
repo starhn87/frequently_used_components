@@ -1,6 +1,15 @@
 import React, { useState } from "react";
+import styled from "styled-components";
 import Wrapper from "../component/common/Wrapper";
 import Tab from "../component/Tab";
+
+const Desc = styled.p`
+  padding-top: 80px;
+
+  @media only screen and (max-width: 700px) {
+    padding-top: 50px;
+  }
+`;
 
 function TabDemo() {
   const [selected, setSelected] = useState(0);
@@ -22,18 +31,15 @@ function TabDemo() {
     },
   ];
 
-  const onChange = (key) => {
-    setSelected(key);
-  };
-
   return (
     <Wrapper title="Tab">
       <Tab
         value={selected}
-        onChange={onChange}
+        onChange={(key) => setSelected(key)}
         items={TAB_ITEMS}
         tabColor="purple"
       />
+      <Desc>{TAB_ITEMS[selected].desc}</Desc>
     </Wrapper>
   );
 }

@@ -13,24 +13,12 @@ const Button = styled.button`
   cursor: pointer;
 `;
 
-const ModalText = styled.p`
-  color: ${(props) => props.modalTextColor};
-`;
-
 function ModalDemo() {
   const [value, setValue] = useState(false);
 
   const onChange = useCallback((newValue) => {
     setValue(newValue);
   }, []);
-
-  const onValueChange = () => {
-    if (value) {
-      return (
-        <ModalText modalTextColor={"#4800ce"}>{"HELLO CODESTATES!"}</ModalText>
-      );
-    }
-  };
 
   const openModal = useCallback(() => {
     if (!value) {
@@ -50,11 +38,11 @@ function ModalDemo() {
       <Modal
         value={value}
         onChange={onChange}
-        onValueChange={onValueChange}
+        content={"HELLO CODESTATES!"}
         outsideClose={true}
       />
     </Wrapper>
   );
 }
 
-export { ModalText, ModalDemo };
+export default ModalDemo;

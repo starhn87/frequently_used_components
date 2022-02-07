@@ -45,12 +45,16 @@ const Close = styled.div`
   cursor: pointer;
 `;
 
-function Modal({ value, onChange, onValueChange, outsideClose = false }) {
+const ModalText = styled.p`
+  color: ${(props) =>
+    props.modalTextColor ? props.modalTextColor : "#4800ce"};
+`;
+
+function Modal({ value, onChange, content, outsideClose = false }) {
   const modal = useRef();
 
   const closeModal = useCallback(() => {
     if (value) {
-      console.log("what?!");
       onChange(false);
     }
   }, [value, onChange]);
@@ -83,7 +87,7 @@ function Modal({ value, onChange, onValueChange, outsideClose = false }) {
           <CloseWrapper>
             <Close onMouseUp={closeModal}>&times;</Close>
           </CloseWrapper>
-          {onValueChange()}
+          <ModalText>{content}</ModalText>
         </ModalContent>
       </ModalBox>
     </>
@@ -93,8 +97,7 @@ function Modal({ value, onChange, onValueChange, outsideClose = false }) {
 Modal.propTypes = {
   value: PropType.bool.isRequired,
   onChange: PropType.func.isRequired,
-  onValueChange: PropType.func.isRequired,
-  modalTextColor: PropType.string,
+  content: PropType.string.isRequired,
   outsideClose: PropType.bool,
 };
 

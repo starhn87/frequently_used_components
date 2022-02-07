@@ -132,18 +132,18 @@ const TOP_100_MOVIES = [
 ];
 
 function AutoCompleteDemo() {
-  const [matchingList, setMatchingList] = useState([]);
+  const [value, setValue] = useState([]);
 
-  const onRecoListChange = (newRecoList) => {
-    setMatchingList(newRecoList);
+  const onChange = (newRecoList) => {
+    setValue(newRecoList);
   };
 
   return (
     <Wrapper title={"AutoComplete"}>
       <AutoComplete
-        matchingList={matchingList}
-        onMatchingListChange={onRecoListChange}
-        WordList={TOP_100_MOVIES}
+        value={value}
+        onChange={onChange}
+        options={TOP_100_MOVIES}
       />
     </Wrapper>
   );

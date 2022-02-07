@@ -75,38 +75,29 @@ const Input = styled.input`
   }
 `;
 
-const Explain = styled.div`
-  padding-top: 20px;
-`;
-
 function Toggle({
   value,
   onChange,
-  onValueChange,
   color = "#4800ce",
   disabled = false,
   switchButtonColor = "white",
 }) {
   return (
-    <>
-      <Switch>
-        <Input type="checkbox" checked={value} readOnly />
-        <Slider
-          color={color}
-          disabled={disabled}
-          switchButtonColor={switchButtonColor}
-          onMouseUp={() => onChange(!value)}
-        ></Slider>
-      </Switch>
-      <Explain>{onValueChange()}</Explain>
-    </>
+    <Switch>
+      <Input type="checkbox" checked={value} readOnly />
+      <Slider
+        color={color}
+        disabled={disabled}
+        switchButtonColor={switchButtonColor}
+        onMouseUp={() => onChange(!value)}
+      ></Slider>
+    </Switch>
   );
 }
 
 Toggle.propTypes = {
   value: PropType.bool.isRequired,
   onChange: PropType.func.isRequired,
-  onValueChange: PropType.func.isRequired,
   color: PropType.string,
   disabled: PropType.bool,
   switchButtonColor: PropType.string,

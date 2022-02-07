@@ -3,7 +3,6 @@ import styled from "styled-components";
 import ClickToEdit from "../component/ClickToEdit";
 import Wrapper from "../component/common/Wrapper";
 import Modal from "../component/Modal";
-import { ModalText } from "./ModalDemo";
 
 const Container = styled.div`
   padding-top: 50px;
@@ -22,16 +21,6 @@ function ClickToEditDemo() {
   const [age, setAge] = useState(20);
   const [modal, setModal] = useState(false);
 
-  const onValueChange = () => {
-    if (modal) {
-      return (
-        <ModalText modalTextColor={"#4800ce"}>
-          {"숫자를 입력해주세요."}
-        </ModalText>
-      );
-    }
-  };
-
   const onAgeChange = (value, event) => {
     if (isNaN(value)) {
       setModal(true);
@@ -44,7 +33,11 @@ function ClickToEditDemo() {
 
   return (
     <Wrapper title="ClickToEdit">
-      <Modal value={modal} onChange={setModal} onValueChange={onValueChange} />
+      <Modal
+        value={modal}
+        onChange={setModal}
+        content={"숫자를 입력해주세요."}
+      />
       <ClickToEdit
         title={"이름"}
         name={"name"}

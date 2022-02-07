@@ -87,47 +87,43 @@ const Data = styled.li`
   }
 `;
 
-function AutoComplete({ matchingList, onMatchingListChange, WordList }) {
-  const [value, setValue] = useState("");
-  const recoList = useRef();
+function AutoComplete({ value, onChange, options }) {
+  const [editingValue, setEditingValue] = useState("");
+  const autoComplete = useRef();
 
-  const onClick = () => {
-    setValue("");
-    onMatchingListChange([]);
+  const inputWord = (word) => {
+    setEditingValue(word);
+    onChange([]);
   };
 
-  const onChange = (event) => {
+  const onEditingValueChange = (event) => {
     const {
       target: { value },
     } = event;
 
-    const newList = WordList.filter((word) =>
-      word.label.toLowerCase().includes(value.toLowerCase())
+    const newList = options.filter((word) =>
+      word.label.toLowerCase().includes(editingValue.toLowerCase())
     );
 
-    onMatchingListChange(newList);
-    setValue(value);
+    onChange(newList);
+    setEditingValue(value);
   };
 
-  const inputWord = (word) => {
-    setValue(word);
-    onMatchingListChange([]);
+  const onClick = () => {
+    setEditingValue("");
+    onChange([]);
   };
 
   const handleClick = useCallback(
     (event) => {
-      if (event.target === recoList) {
+      if (event.target === autoComplete) {
         return;
       }
 
-      onMatchingListChange([]);
+      onChange([]);
     },
-    [onMatchingListChange]
+    [onChange]
   );
-
-  useEffect(() => {
-    onMatchingListChange?.(matchingList);
-  }, [matchingList, onMatchingListChange]);
 
   useEffect(() => {
     document.addEventListener("click", handleClick);
@@ -142,16 +138,16 @@ function AutoComplete({ matchingList, onMatchingListChange, WordList }) {
       <Box>
         <Input
           type="text"
-          onChange={onChange}
-          value={value}
-          count={matchingList ? matchingList.length : 0}
+          onChange={onEditingValueChange}
+          value={editingValue}
+          count={value ? value.length : 0}
         />
         <Xbutton onClick={onClick}>x</Xbutton>
       </Box>
-      <Div ref={recoList} count={matchingList ? matchingList.length : 0}>
+      <Div ref={autoComplete} count={value ? value.length : 0}>
         <List>
-          {matchingList &&
-            matchingList.map((word) => (
+          {value &&
+            value.map((word) => (
               <Data key={uuid()} onClick={() => inputWord(word.label)}>
                 {word.label}
               </Data>
@@ -163,14 +159,14 @@ function AutoComplete({ matchingList, onMatchingListChange, WordList }) {
 }
 
 AutoComplete.propTypes = {
-  matchingList: PropType.arrayOf(
+  value: PropType.arrayOf(
     PropType.shape({
       label: PropType.string,
       year: PropType.number,
     })
   ).isRequired,
-  onmatchingListChange: PropType.func,
-  WordList: PropType.arrayOf(
+  onChange: PropType.func.isRequired,
+  options: PropType.arrayOf(
     PropType.shape({
       label: PropType.string,
       year: PropType.number,
