@@ -39,13 +39,13 @@ function ClickToEditDemo() {
         content={"숫자를 입력해주세요."}
       />
       <ClickToEdit
-        title={"이름"}
+        label={"이름"}
         name={"name"}
         value={name}
         onChange={setName}
       />
       <ClickToEdit
-        title={"나이"}
+        label={"나이"}
         name={"age"}
         value={age}
         onChange={onAgeChange}

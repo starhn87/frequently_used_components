@@ -15,12 +15,12 @@ const Input = styled.input`
   padding: 10px;
 `;
 
-function ClickToEdit({ title, name, value, onChange }) {
+function ClickToEdit({ label, name, value, onChange }) {
   const [editingValue, setEditingValue] = useState(value);
 
   return (
     <Box>
-      <Label htmlFor="username">{title}</Label>
+      <Label htmlFor={name}>{label}</Label>
       <Input
         type="text"
         name={name}
@@ -33,7 +33,7 @@ function ClickToEdit({ title, name, value, onChange }) {
 }
 
 ClickToEdit.propTypes = {
-  title: PropType.string.isRequired,
+  label: PropType.string.isRequired,
   name: PropType.string.isRequired,
   value: PropType.oneOfType([PropType.string, PropType.number]).isRequired,
   onChange: PropType.func.isRequired,

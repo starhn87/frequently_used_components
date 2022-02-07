@@ -81,16 +81,14 @@ function Modal({ value, onChange, content, outsideClose = false }) {
   }, [outsideCloseModal, outsideClose]);
 
   return (
-    <>
-      <ModalBox ref={modal} clicked={value}>
-        <ModalContent>
-          <CloseWrapper>
-            <Close onMouseUp={closeModal}>&times;</Close>
-          </CloseWrapper>
-          <ModalText>{content}</ModalText>
-        </ModalContent>
-      </ModalBox>
-    </>
+    <ModalBox ref={modal} clicked={value}>
+      <ModalContent>
+        <CloseWrapper>
+          <Close onMouseUp={closeModal}>&times;</Close>
+        </CloseWrapper>
+        <ModalText>{content}</ModalText>
+      </ModalContent>
+    </ModalBox>
   );
 }
 
