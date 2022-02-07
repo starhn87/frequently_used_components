@@ -5,13 +5,13 @@ import Tag from "../component/Tag";
 function TagDemo() {
   const [tags, setTags] = useState([]);
 
-  const onTagsChange = (newTag) => {
+  const onChange = (newTag) => {
     setTags(newTag);
   };
 
   return (
     <Wrapper title="Tag">
-      <Tag tags={tags} onTagsChange={onTagsChange} />
+      <Tag value={tags} onChange={onChange} />
     </Wrapper>
   );
 }

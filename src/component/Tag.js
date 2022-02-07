@@ -64,21 +64,21 @@ const Input = styled.input`
   }
 `;
 
-function Tag({ tags, onTagsChange, tagColor = "#4800ce" }) {
-  const [value, setValue] = useState("");
+function Tag({ value, onChange, tagColor = "#4800ce" }) {
+  const [editingValue, setEditingValue] = useState("");
   const [focus, setFocus] = useState(false);
 
   const onClick = (pickedTag) => {
-    const filteredTags = tags.filter((tag) => tag !== pickedTag);
-    onTagsChange(filteredTags);
+    const filteredTags = value.filter((tag) => tag !== pickedTag);
+    onChange(filteredTags);
   };
 
-  const onChange = (event) => {
+  const onValueChange = (event) => {
     const {
       target: { value },
     } = event;
 
-    setValue(value);
+    setEditingValue(value);
   };
 
   const handleKeyPress = (event) => {
@@ -86,24 +86,24 @@ function Tag({ tags, onTagsChange, tagColor = "#4800ce" }) {
       return;
     }
 
-    if (tags.includes(value)) {
+    if (value.includes(editingValue)) {
       alert("이미 존재하는 태그입니다.");
-      setValue("");
+      setEditingValue("");
       return;
-    } else if (value.trim() === "") {
-      setValue("");
+    } else if (editingValue.trim() === "") {
+      setEditingValue("");
       return;
     }
 
-    onTagsChange([...tags, value]);
-    setValue("");
+    onChange([...value, editingValue]);
+    setEditingValue("");
   };
 
   return (
     <Container focus={focus} tagColor={tagColor}>
       <TagList>
-        {tags &&
-          tags.map((tag) => (
+        {value &&
+          value.map((tag) => (
             <TagBox key={tag} tagColor={tagColor}>
               {tag}
               <Xbutton onClick={() => onClick(tag)} tagColor={tagColor}>
@@ -117,16 +117,16 @@ function Tag({ tags, onTagsChange, tagColor = "#4800ce" }) {
         onKeyPress={handleKeyPress}
         onFocus={() => setFocus(true)}
         onBlur={() => setFocus(false)}
-        value={value}
-        onChange={onChange}
+        value={editingValue}
+        onChange={onValueChange}
       ></Input>
     </Container>
   );
 }
 
 Tag.propTypes = {
-  tags: PropType.array.isRequired,
-  onTagsChange: PropType.func.isRequired,
+  value: PropType.arrayOf(PropType.string),
+  onChange: PropType.func.isRequired,
   tagColor: PropType.string,
 };
 
