@@ -1,19 +1,31 @@
 import React, { useState } from "react";
+import styled from "styled-components";
 import Wrapper from "../component/common/Wrapper";
 import Modal from "../component/Modal";
 
-function ModalDemo() {
-  const [clicked, setClicked] = useState(false);
+const Text = styled.p`
+  color: ${(props) => props.modalTextColor};
+`;
 
-  const onChange = (newClicked) => {
-    setClicked(newClicked);
+function ModalDemo() {
+  const [value, setValue] = useState(false);
+
+  const onChange = (newValue) => {
+    setValue(newValue);
+  };
+
+  const onValueChange = () => {
+    if (value) {
+      return <Text modalTextColor={"#4800ce"}>{"HELLO CODESTATES!"}</Text>;
+    }
   };
 
   return (
     <Wrapper title="Modal">
       <Modal
-        value={clicked}
+        value={value}
         onChange={onChange}
+        onValueChange={onValueChange}
         modalText="wassssssssssup!"
         outsideClose={true}
       />

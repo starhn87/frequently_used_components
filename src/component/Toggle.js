@@ -82,6 +82,7 @@ const Explain = styled.div`
 function Toggle({
   value,
   onChange,
+  onValueChange,
   color = "#4800ce",
   disabled = false,
   switchButtonColor = "white",
@@ -97,7 +98,7 @@ function Toggle({
           onMouseUp={() => onChange(!value)}
         ></Slider>
       </Switch>
-      <Explain>{`Toggle Switch ${value ? "ON" : "OFF"}`}</Explain>
+      <Explain>{onValueChange()}</Explain>
     </>
   );
 }
@@ -105,6 +106,7 @@ function Toggle({
 Toggle.propTypes = {
   value: PropType.bool.isRequired,
   onChange: PropType.func.isRequired,
+  onValueChange: PropType.func.isRequired,
   color: PropType.string,
   disabled: PropType.bool,
   switchButtonColor: PropType.string,

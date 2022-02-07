@@ -3,13 +3,18 @@ import Wrapper from "../component/common/Wrapper";
 import Toggle from "../component/Toggle";
 
 function ToggleDemo() {
-  const [checked, setChecked] = useState(false);
+  const [value, setValue] = useState(false);
+
+  const onValueChange = () => {
+    return `Toggle Switch ${value ? "ON" : "OFF"}`;
+  };
 
   return (
     <Wrapper title="Toggle">
       <Toggle
-        value={checked}
-        onChange={setChecked}
+        value={value}
+        onChange={setValue}
+        onValueChange={onValueChange}
         color="blue"
         disabled={false}
         switchButtonColor="aliceblue"

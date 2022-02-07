@@ -18,10 +18,6 @@ const Input = styled.input`
 function ClickToEdit({ title, name, value, onChange }) {
   const [editingValue, setEditingValue] = useState(value);
 
-  const onBlur = () => {
-    onChange(editingValue);
-  };
-
   return (
     <Box>
       <Label htmlFor="username">{title}</Label>
@@ -30,7 +26,7 @@ function ClickToEdit({ title, name, value, onChange }) {
         name={name}
         value={editingValue}
         onChange={(event) => setEditingValue(event.target.value)}
-        onBlur={onBlur}
+        onBlur={() => onChange(editingValue)}
       />
     </Box>
   );

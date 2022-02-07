@@ -68,7 +68,7 @@ const Div = styled.div`
   border-bottom-right-radius: 17px;
   border-bottom-left-radius: 17px;
   box-shadow: 0 5px 4px -2px #dbdbdb;
-  z-index: 1;
+  background-color: white;
 `;
 
 const List = styled.ul`

@@ -2,24 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import PropType from "prop-types";
 
-const TABS_ITEMS = [
-  {
-    key: 0,
-    title: "Tab 1",
-    desc: "Tab Menu ONE",
-  },
-  {
-    key: 1,
-    title: "Tab 2",
-    desc: "Tab Menu TWO",
-  },
-  {
-    key: 2,
-    title: "Tab 3",
-    desc: "Tab Menu THREE",
-  },
-];
-
 const TabContrainer = styled.div`
   display: flex;
   width: 50%;
@@ -52,16 +34,11 @@ const Desc = styled.p`
   }
 `;
 
-function Tab({
-  value,
-  onChange,
-  defaultItems = TABS_ITEMS,
-  tabColor = "#4800ce",
-}) {
+function Tab({ value, onChange, items, tabColor = "#4800ce" }) {
   return (
     <>
       <TabContrainer>
-        {defaultItems.map((tab) => (
+        {items.map((tab) => (
           <TabValue
             key={tab.key}
             onClick={() => onChange(tab.key)}
@@ -72,7 +49,7 @@ function Tab({
           </TabValue>
         ))}
       </TabContrainer>
-      <Desc>{defaultItems[value].desc}</Desc>
+      <Desc>{items[value].desc}</Desc>
     </>
   );
 }
@@ -80,7 +57,14 @@ function Tab({
 Tab.propTypes = {
   value: PropType.number.isRequired,
   onChange: PropType.func.isRequired,
-  defaultItems: PropType.object,
+  items: PropType.arrayOf(
+    PropType.shape({
+      key: PropType.number.isRequired,
+      title: PropType.string.isRequired,
+      desc: PropType.string.isRequired,
+      onClick: PropType.func,
+    })
+  ),
   tabColor: PropType.string,
 };
 

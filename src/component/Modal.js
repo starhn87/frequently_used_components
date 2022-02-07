@@ -55,15 +55,10 @@ const Close = styled.div`
   cursor: pointer;
 `;
 
-const Text = styled.p`
-  color: ${(props) => props.modalTextColor};
-`;
-
 function Modal({
   value,
   onChange,
-  modalText = "HELLO CODESTATES!",
-  modalTextColor = "#4800ce",
+  onValueChange,
   buttonTextColor = "white",
   buttonColor = "#4800ce",
   outsideClose = false,
@@ -117,7 +112,7 @@ function Modal({
           <CloseWrapper>
             <Close onMouseUp={closeModal}>&times;</Close>
           </CloseWrapper>
-          <Text modalTextColor={modalTextColor}>{modalText}</Text>
+          {onValueChange()}
         </ModalContent>
       </ModalBox>
     </>
@@ -127,6 +122,7 @@ function Modal({
 Modal.propTypes = {
   value: PropType.bool.isRequired,
   onChange: PropType.func.isRequired,
+  onValueChange: PropType.func.isRequired,
   modalText: PropType.string,
   modalTextColor: PropType.string,
   buttonTextColor: PropType.string,
