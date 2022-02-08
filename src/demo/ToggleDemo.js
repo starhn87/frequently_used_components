@@ -8,12 +8,12 @@ const Explain = styled.div`
 `;
 
 function ToggleDemo() {
-  const [value, setValue] = useState(false);
+  const [checked, setChecked] = useState(false);
 
   return (
     <Wrapper title="Toggle">
-      <Toggle value={value} onChange={setValue} disabled={false} />
-      <Explain>{`Toggle Switch ${value ? "ON" : "OFF"}`}</Explain>
+      <Toggle checked={checked} onClick={setChecked} disabled={false} />
+      <Explain>{`Toggle Switch ${checked ? "ON" : "OFF"}`}</Explain>
     </Wrapper>
   );
 }

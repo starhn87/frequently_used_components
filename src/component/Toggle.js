@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import PropType from "prop-types";
 
-const Switch = styled.label`
+const ToggleSwitch = styled.label`
   position: relative;
   display: inline-block;
   width: 80px;
@@ -64,21 +64,25 @@ const Input = styled.input`
   }
 `;
 
-function Toggle({ value, onChange, disabled = false }) {
+function Toggle({ checked, onClick, disabled = false }) {
   return (
-    <Switch>
-      <Input type="checkbox" className={`${value ? "active" : ""}`} readOnly />
+    <ToggleSwitch>
+      <Input
+        type="checkbox"
+        className={`${checked ? "active" : ""}`}
+        readOnly
+      />
       <Slider
-        onMouseUp={() => onChange(!value)}
+        onClick={() => onClick(!checked)}
         className={`${disabled ? "disabled" : ""}`}
       ></Slider>
-    </Switch>
+    </ToggleSwitch>
   );
 }
 
 Toggle.propTypes = {
-  value: PropType.bool.isRequired,
-  onChange: PropType.func.isRequired,
+  checked: PropType.bool.isRequired,
+  onClick: PropType.func.isRequired,
   disabled: PropType.bool,
 };
 

@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Wrapper from "../component/common/Wrapper";
 import Modal from "../component/Modal";
@@ -16,22 +16,12 @@ const Button = styled.button`
 function ModalDemo() {
   const [value, setValue] = useState(false);
 
-  const onChange = useCallback((newValue) => {
-    setValue(newValue);
-  }, []);
-
-  const openModal = useCallback(() => {
-    if (!value) {
-      onChange(true);
-    }
-  }, [value, onChange]);
-
   return (
     <Wrapper title="Modal">
-      <Button onMouseUp={openModal}>Open Modal</Button>
+      <Button onClick={() => setValue(true)}>Open Modal</Button>
       <Modal
         value={value}
-        onChange={onChange}
+        onChange={setValue}
         content={"HELLO CODESTATES!"}
         outsideClose={true}
       />

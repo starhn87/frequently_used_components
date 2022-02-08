@@ -12,7 +12,7 @@ const Desc = styled.p`
 `;
 
 function TabDemo() {
-  const [selected, setSelected] = useState(0);
+  const [selectedTab, setSelectedTab] = useState(0);
   const TAB_ITEMS = [
     {
       key: 0,
@@ -34,11 +34,11 @@ function TabDemo() {
   return (
     <Wrapper title="Tab">
       <Tab
-        value={selected}
-        onChange={(key) => setSelected(key)}
+        selectedTab={selectedTab}
+        onChange={(key) => setSelectedTab(key)}
         items={TAB_ITEMS}
       />
-      <Desc>{TAB_ITEMS[selected].desc}</Desc>
+      <Desc>{TAB_ITEMS[selectedTab].desc}</Desc>
     </Wrapper>
   );
 }

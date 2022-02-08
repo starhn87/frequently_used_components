@@ -12,7 +12,7 @@ const TabContrainer = styled.div`
   }
 `;
 
-const TabValue = styled.button`
+const TabElement = styled.button`
   padding: 10px 0;
   flex-grow: 1;
   color: black;
@@ -26,18 +26,18 @@ const TabValue = styled.button`
   }
 `;
 
-function Tab({ value, onChange, items }) {
+function Tab({ selectedTab, onChange, items }) {
   return (
     <>
       <TabContrainer>
         {items.map((tab) => (
-          <TabValue
+          <TabElement
             key={tab.key}
             onClick={() => onChange(tab.key)}
-            className={value === tab.key ? "selected" : ""}
+            className={selectedTab === tab.key ? "selected" : ""}
           >
             {tab.title}
-          </TabValue>
+          </TabElement>
         ))}
       </TabContrainer>
     </>
@@ -45,7 +45,7 @@ function Tab({ value, onChange, items }) {
 }
 
 Tab.propTypes = {
-  value: PropType.number.isRequired,
+  selectedTab: PropType.number.isRequired,
   onChange: PropType.func.isRequired,
   items: PropType.arrayOf(
     PropType.shape({
