@@ -1,5 +1,5 @@
 import React from "react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 const Circle = styled.div`
@@ -20,7 +20,7 @@ const Circle = styled.div`
 
 function MouseCircle() {
   const HALF_RADIUS = 25;
-  const circle = useRef();
+  const [clicking, setClicking] = useState(false);
   const [x, setX] = useState(0);
   const [y, setY] = useState(0);
 
@@ -28,9 +28,9 @@ function MouseCircle() {
     const x = event.clientX - HALF_RADIUS;
     const y = event.clientY - HALF_RADIUS;
 
-    circle.current.classList.toggle("clicking");
     setX(x);
     setY(y);
+    setClicking(true);
   };
 
   const handleMouseMove = (event) => {
@@ -42,7 +42,7 @@ function MouseCircle() {
   };
 
   const handleMouseUp = () => {
-    circle.current.classList.toggle("clicking");
+    setClicking(false);
   };
 
   useEffect(() => {
@@ -57,7 +57,12 @@ function MouseCircle() {
     };
   }, [x, y]);
 
-  return <Circle ref={circle} style={{ top: `${y}px`, left: `${x}px` }} />;
+  return (
+    <Circle
+      className={`${clicking ? "clicking" : ""}`}
+      style={{ top: `${y}px`, left: `${x}px` }}
+    />
+  );
 }
 
 export default MouseCircle;

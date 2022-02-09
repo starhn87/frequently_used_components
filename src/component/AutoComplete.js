@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 import { v4 as uuid } from "uuid";
 import PropType from "prop-types";
@@ -100,20 +100,13 @@ function AutoComplete({
 }) {
   const autoComplete = useRef();
 
-  const handleClick = useCallback(
-    (event) => {
-      onOutOfSuggestionsClick(event, autoComplete);
-    },
-    [onOutOfSuggestionsClick]
-  );
-
   useEffect(() => {
-    document.addEventListener("click", handleClick);
+    document.addEventListener("click", onOutOfSuggestionsClick);
 
     return () => {
-      document.removeEventListener("click", handleClick);
+      document.removeEventListener("click", onOutOfSuggestionsClick);
     };
-  }, [handleClick]);
+  }, [onOutOfSuggestionsClick]);
 
   return (
     <Container>

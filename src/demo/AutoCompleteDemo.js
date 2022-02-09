@@ -31,10 +31,6 @@ function AutoCompleteDemo({ options }) {
   };
 
   const onOutOfSuggestionsClick = (event, ref) => {
-    if (event.target === ref) {
-      return;
-    }
-
     setSuggestions([]);
   };
 
