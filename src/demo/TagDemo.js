@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import Wrapper from "../component/common/Wrapper";
 import Tag from "../component/Tag";
+import { useModal } from "../ModalContext";
 
 function TagDemo() {
   const [tags, setTags] = useState([]);
   const [value, setValue] = useState("");
+  const { openModal } = useModal();
 
   const onChange = (event) => {
     const {
@@ -25,7 +27,7 @@ function TagDemo() {
     }
 
     if (tags.includes(value)) {
-      alert("이미 존재하는 태그입니다.");
+      openModal("이미 존재하는 태그입니다.");
       setValue("");
       return;
     } else if (value.trim() === "") {

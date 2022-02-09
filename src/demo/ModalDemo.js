@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import Wrapper from "../component/common/Wrapper";
-import Modal from "../component/Modal";
+import { useModal } from "../ModalContext";
 
 const Button = styled.button`
   width: 120px;
@@ -14,23 +14,13 @@ const Button = styled.button`
 `;
 
 function ModalDemo() {
-  const [value, setValue] = useState(false);
-
-  const closeModal = () => {
-    if (value) {
-      setValue(false);
-    }
-  };
+  const { openModal } = useModal();
 
   return (
     <Wrapper title="Modal">
-      <Button onClick={() => setValue(true)}>Open Modal</Button>
-      <Modal
-        value={value}
-        closeModal={closeModal}
-        content={"HELLO CODESTATES!"}
-        outsideClose={true}
-      />
+      <Button onClick={() => openModal("HELLO CODESTATES!", false)}>
+        Open Modal
+      </Button>
     </Wrapper>
   );
 }

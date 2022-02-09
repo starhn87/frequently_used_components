@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef } from "react";
+import React from "react";
 import styled from "styled-components";
 import PropType from "prop-types";
 
@@ -27,6 +27,7 @@ const ModalContent = styled.div`
   border-radius: 12px;
   border-color: transparent;
   background-color: #fefefe;
+  text-align: center;
 `;
 
 const CloseWrapper = styled.div`
@@ -47,32 +48,13 @@ const ModalText = styled.p`
   color: #4800ce;
 `;
 
-function Modal({ value, closeModal, content, outsideClose = false }) {
-  const modal = useRef();
-
-  const outsideCloseModal = useCallback(
-    (event) => {
-      if (event.target === modal.current) {
-        closeModal();
-      }
-    },
-    [closeModal]
-  );
-
-  useEffect(() => {
-    if (outsideClose) {
-      window.addEventListener("mouseup", outsideCloseModal);
-    }
-
-    return () => {
-      if (outsideClose) {
-        window.addEventListener("mouseup", outsideCloseModal);
-      }
-    };
-  }, [outsideCloseModal, outsideClose]);
-
-  return (
-    <ModalBox ref={modal} className={`${value ? "active" : ""}`}>
+const Modal = React.forwardRef(
+  ({ value, closeModal, content, onOutOfModalClick }, modalRef) => (
+    <ModalBox
+      ref={modalRef}
+      onClick={onOutOfModalClick}
+      className={`${value ? "active" : ""}`}
+    >
       <ModalContent>
         <CloseWrapper>
           <Close onMouseUp={closeModal}>&times;</Close>
@@ -80,14 +62,14 @@ function Modal({ value, closeModal, content, outsideClose = false }) {
         <ModalText>{content}</ModalText>
       </ModalContent>
     </ModalBox>
-  );
-}
+  )
+);
 
 Modal.propTypes = {
   value: PropType.bool.isRequired,
   closeModal: PropType.func.isRequired,
-  content: PropType.string.isRequired,
-  outsideClose: PropType.bool,
+  content: PropType.node.isRequired,
+  onOutOfModalClick: PropType.func.isRequired,
 };
 
 export default Modal;

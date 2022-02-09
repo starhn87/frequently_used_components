@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import ClickToEdit from "../component/ClickToEdit";
 import Wrapper from "../component/common/Wrapper";
-import Modal from "../component/Modal";
+import { useModal } from "../ModalContext";
 
 const Container = styled.div`
   padding-top: 50px;
@@ -19,11 +19,11 @@ const Text = styled.span`
 function ClickToEditDemo() {
   const [name, setName] = useState("홍길동");
   const [age, setAge] = useState(20);
-  const [modal, setModal] = useState(false);
+  const { openModal } = useModal();
 
   const onAgeChange = (value, event) => {
     if (isNaN(value)) {
-      setModal(true);
+      openModal("숫자를 입력해주세요.");
       event.target.focus();
       return;
     }
@@ -33,11 +33,6 @@ function ClickToEditDemo() {
 
   return (
     <Wrapper title="ClickToEdit">
-      <Modal
-        value={modal}
-        closeModal={() => setModal(false)}
-        content={"숫자를 입력해주세요."}
-      />
       <ClickToEdit
         label={"이름"}
         name={"name"}
