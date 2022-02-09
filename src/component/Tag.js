@@ -63,56 +63,24 @@ const Input = styled.input`
   }
 `;
 
-function Tag({ value, onChange }) {
-  const [editingValue, setEditingValue] = useState("");
+function Tag({ value, onChange, onPressEnter, tags, onRemoveTag }) {
   const [active, setActive] = useState(false);
-
-  const onClick = (pickedTag) => {
-    const filteredTags = value.filter((tag) => tag !== pickedTag);
-    onChange(filteredTags);
-  };
-
-  const onValueChange = (event) => {
-    const {
-      target: { value },
-    } = event;
-
-    setEditingValue(value);
-  };
-
-  const handleKeyPress = (event) => {
-    if (event.key !== "Enter") {
-      return;
-    }
-
-    if (value.includes(editingValue)) {
-      alert("이미 존재하는 태그입니다.");
-      setEditingValue("");
-      return;
-    } else if (editingValue.trim() === "") {
-      setEditingValue("");
-      return;
-    }
-
-    onChange([...value, editingValue]);
-    setEditingValue("");
-  };
 
   return (
     <Container className={`${active ? "active" : ""}`}>
       <TagList>
-        {value &&
-          value.map((tag) => (
+        {tags &&
+          tags.map((tag) => (
             <TagBox key={tag}>
               {tag}
-              <Xbutton onClick={() => onClick(tag)}>x</Xbutton>
+              <Xbutton onClick={() => onRemoveTag(tag)}>x</Xbutton>
             </TagBox>
           ))}
       </TagList>
       <Input
-        value={editingValue}
-        onChange={onValueChange}
-        onKeyPress={handleKeyPress}
+        value={value}
+        onChange={onChange}
+        onKeyPress={onPressEnter}
         onFocus={() => setActive(true)}
         onBlur={() => setActive(false)}
         placeholder="Press enter to add tags"
@@ -122,8 +90,11 @@ function Tag({ value, onChange }) {
 }
 
 Tag.propTypes = {
-  value: PropType.arrayOf(PropType.string),
+  value: PropType.string.isRequired,
   onChange: PropType.func.isRequired,
+  onPressEnter: PropType.func.isRequired,
+  tags: PropType.arrayOf(PropType.string),
+  onRemoveTag: PropType.func.isRequired,
 };
 
 export default Tag;

@@ -31,13 +31,13 @@ function TabDemo() {
     },
   ];
 
+  const onChange = (key) => {
+    setSelectedTab(key);
+  };
+
   return (
     <Wrapper title="Tab">
-      <Tab
-        selectedTab={selectedTab}
-        onChange={(key) => setSelectedTab(key)}
-        items={TAB_ITEMS}
-      />
+      <Tab selectedTab={selectedTab} onChange={onChange} items={TAB_ITEMS} />
       <Desc>{TAB_ITEMS[selectedTab].desc}</Desc>
     </Wrapper>
   );

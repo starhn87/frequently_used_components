@@ -90,32 +90,15 @@ const Data = styled.li`
   }
 `;
 
-function AutoComplete({ value, onChange, options }) {
-  const [editingValue, setEditingValue] = useState("");
+function AutoComplete({
+  value,
+  onChange,
+  suggestions,
+  onSuggestionsChange,
+  onSuggestionClick,
+  onResetValue,
+}) {
   const autoComplete = useRef();
-
-  const inputWord = (word) => {
-    setEditingValue(word);
-    onChange([]);
-  };
-
-  const onEditingValueChange = (event) => {
-    const {
-      target: { value },
-    } = event;
-
-    const newList = options.filter((word) =>
-      word.label.toLowerCase().includes(editingValue.toLowerCase())
-    );
-
-    onChange(newList);
-    setEditingValue(value);
-  };
-
-  const onClick = () => {
-    setEditingValue("");
-    onChange([]);
-  };
 
   const handleClick = useCallback(
     (event) => {
@@ -123,9 +106,9 @@ function AutoComplete({ value, onChange, options }) {
         return;
       }
 
-      onChange([]);
+      onSuggestionsChange([]);
     },
-    [onChange]
+    [onSuggestionsChange]
   );
 
   useEffect(() => {
@@ -141,21 +124,20 @@ function AutoComplete({ value, onChange, options }) {
       <Box>
         <Input
           type="text"
-          value={editingValue}
-          onChange={onEditingValueChange}
-          className={`${value.length > 0 ? "list" : "active"}`}
+          value={value}
+          onChange={onChange}
+          className={`${suggestions.length > 0 ? "list" : "active"}`}
         />
-        <Xbutton onClick={onClick}>x</Xbutton>
+        <Xbutton onClick={onResetValue}>x</Xbutton>
       </Box>
       <Div
         ref={autoComplete}
-        count={value ? value.length : 0}
-        className={`${value.length > 0 ? "list" : ""}`}
+        className={`${suggestions.length > 0 ? "list" : ""}`}
       >
         <List>
-          {value &&
-            value.map((word) => (
-              <Data key={uuid()} onClick={() => inputWord(word.label)}>
+          {suggestions &&
+            suggestions.map((word) => (
+              <Data key={uuid()} onClick={() => onSuggestionClick(word.label)}>
                 {word.label}
               </Data>
             ))}
@@ -166,19 +148,17 @@ function AutoComplete({ value, onChange, options }) {
 }
 
 AutoComplete.propTypes = {
-  value: PropType.arrayOf(
-    PropType.shape({
-      label: PropType.string,
-      year: PropType.number,
-    })
-  ).isRequired,
+  value: PropType.string.isRequired,
   onChange: PropType.func.isRequired,
-  options: PropType.arrayOf(
+  suggestions: PropType.arrayOf(
     PropType.shape({
       label: PropType.string,
       year: PropType.number,
     })
   ).isRequired,
+  onSuggestionsChange: PropType.func.isRequired,
+  onSuggestionClick: PropType.func.isRequired,
+  onResetValue: PropType.func.isRequired,
 };
 
 export default AutoComplete;
