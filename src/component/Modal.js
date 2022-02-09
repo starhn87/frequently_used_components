@@ -47,14 +47,8 @@ const ModalText = styled.p`
   color: #4800ce;
 `;
 
-function Modal({ value, onChange, content, outsideClose = false }) {
+function Modal({ value, closeModal, content, outsideClose = false }) {
   const modal = useRef();
-
-  const closeModal = useCallback(() => {
-    if (value) {
-      onChange(false);
-    }
-  }, [value, onChange]);
 
   const outsideCloseModal = useCallback(
     (event) => {
@@ -91,7 +85,7 @@ function Modal({ value, onChange, content, outsideClose = false }) {
 
 Modal.propTypes = {
   value: PropType.bool.isRequired,
-  onChange: PropType.func.isRequired,
+  closeModal: PropType.func.isRequired,
   content: PropType.string.isRequired,
   outsideClose: PropType.bool,
 };

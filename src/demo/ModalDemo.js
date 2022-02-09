@@ -16,12 +16,18 @@ const Button = styled.button`
 function ModalDemo() {
   const [value, setValue] = useState(false);
 
+  const closeModal = () => {
+    if (value) {
+      setValue(false);
+    }
+  };
+
   return (
     <Wrapper title="Modal">
       <Button onClick={() => setValue(true)}>Open Modal</Button>
       <Modal
         value={value}
-        onChange={setValue}
+        closeModal={closeModal}
         content={"HELLO CODESTATES!"}
         outsideClose={true}
       />

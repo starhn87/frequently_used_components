@@ -35,7 +35,7 @@ function ClickToEditDemo() {
     <Wrapper title="ClickToEdit">
       <Modal
         value={modal}
-        onChange={setModal}
+        closeModal={() => setModal(false)}
         content={"숫자를 입력해주세요."}
       />
       <ClickToEdit

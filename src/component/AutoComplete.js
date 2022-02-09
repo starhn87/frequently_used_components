@@ -94,21 +94,17 @@ function AutoComplete({
   value,
   onChange,
   suggestions,
-  onSuggestionsChange,
   onSuggestionClick,
   onResetValue,
+  onOutOfSuggestionsClick,
 }) {
   const autoComplete = useRef();
 
   const handleClick = useCallback(
     (event) => {
-      if (event.target === autoComplete) {
-        return;
-      }
-
-      onSuggestionsChange([]);
+      onOutOfSuggestionsClick(event, autoComplete);
     },
-    [onSuggestionsChange]
+    [onOutOfSuggestionsClick]
   );
 
   useEffect(() => {
@@ -156,9 +152,9 @@ AutoComplete.propTypes = {
       year: PropType.number,
     })
   ).isRequired,
-  onSuggestionsChange: PropType.func.isRequired,
   onSuggestionClick: PropType.func.isRequired,
   onResetValue: PropType.func.isRequired,
+  onOutOfSuggestionsClick: PropType.func.isRequired,
 };
 
 export default AutoComplete;

@@ -30,15 +30,23 @@ function AutoCompleteDemo({ options }) {
     setSuggestions([]);
   };
 
+  const onOutOfSuggestionsClick = (event, ref) => {
+    if (event.target === ref) {
+      return;
+    }
+
+    setSuggestions([]);
+  };
+
   return (
     <Wrapper title={"AutoComplete"}>
       <AutoComplete
         value={value}
         onChange={onChange}
         suggestions={suggestions}
-        onSuggestionsChange={setSuggestions}
         onSuggestionClick={onSuggestionClick}
         onResetValue={onResetValue}
+        onOutOfSuggestionsClick={onOutOfSuggestionsClick}
       />
     </Wrapper>
   );
