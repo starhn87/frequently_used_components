@@ -17,7 +17,7 @@ function TagDemo() {
   };
 
   const onRemoveTag = (pickedTag) => {
-    const filteredTags = value.filter((tag) => tag !== pickedTag);
+    const filteredTags = tags.filter((tag) => tag !== pickedTag);
     setTags(filteredTags);
   };
 
