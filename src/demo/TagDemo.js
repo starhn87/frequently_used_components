@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Wrapper from "../component/common/Wrapper";
 import Tag from "../component/Tag";
-import { useModal } from "../ModalContext";
+import { useModal } from "../context/ModalContext";
 
 function TagDemo() {
   const [tags, setTags] = useState([]);

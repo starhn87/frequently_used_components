@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import ClickToEdit from "../component/ClickToEdit";
 import Wrapper from "../component/common/Wrapper";
-import { useModal } from "../ModalContext";
+import { useModal } from "../context/ModalContext";
 
 const Container = styled.div`
   padding-top: 50px;

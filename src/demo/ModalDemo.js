@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Wrapper from "../component/common/Wrapper";
-import { useModal } from "../ModalContext";
+import { useModal } from "../context/ModalContext";
 
 const Button = styled.button`
   width: 120px;
