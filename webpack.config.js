@@ -3,22 +3,33 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const FaviconsWebpackPlugin = require("favicons-webpack-plugin");
 
-const BASE_JS = "./src/component/";
+const BASE_JS = "./src/";
 
 module.exports = {
   entry: {
     common: [
-      BASE_JS + "common/GlobalStyles.js",
-      BASE_JS + "common/MouseCircle.js",
-      BASE_JS + "common/Wrapper.js",
+      BASE_JS + "component/common/GlobalStyles.js",
+      BASE_JS + "component/common/MouseCircle.js",
+      BASE_JS + "component/common/Wrapper.js",
     ],
-    autoComplete: BASE_JS + "AutoComplete.js",
-    clicktoEdit: BASE_JS + "ClickToEdit.js",
-    modal: BASE_JS + "Modal.js",
-    tab: BASE_JS + "Tab.js",
-    tag: BASE_JS + "Tag.js",
-    toggle: BASE_JS + "Toggle.js",
+    autoComplete: [
+      BASE_JS + "component/AutoComplete.js",
+      BASE_JS + "demo/AutoCompleteDemo.js",
+    ],
+    clicktoEdit: [
+      BASE_JS + "component/ClickToEdit.js",
+      BASE_JS + "demo/ClickToEditDemo.js",
+    ],
+    modal: [
+      BASE_JS + "component/Modal.js",
+      BASE_JS + "demo/ModalDemo.js",
+      BASE_JS + "context/ModalContext.js",
+    ],
+    tab: [BASE_JS + "component/Tab.js", BASE_JS + "demo/TabDemo.js"],
+    tag: [BASE_JS + "component/Tag.js", BASE_JS + "demo/TagDemo.js"],
+    toggle: [BASE_JS + "component/Toggle.js", BASE_JS + "demo/ToggleDemo.js"],
     main: ["./src/App.js", "./src/index.js"],
+    asset: "./src/assets/movies.js",
   },
   mode: process.env.NODE_ENV,
   output: {
