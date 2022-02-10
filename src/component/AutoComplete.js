@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { v4 as uuid } from "uuid";
 import PropType from "prop-types";
@@ -29,18 +29,13 @@ const Input = styled.input`
   border: 1px solid #e3e3e3;
   border-radius: 17px;
 
-  &.list {
+  &.suggestions {
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
   }
 
-  &.active {
-    &:focus {
-      box-shadow: 0 5px 4px -2px #dbdbdb;
-    }
-  }
-
   &:focus {
+    box-shadow: 0 5px 4px -2px #dbdbdb;
     outline: none;
   }
 `;
@@ -69,7 +64,7 @@ const Div = styled.div`
   box-shadow: 0 5px 4px -2px #dbdbdb;
   background-color: white;
 
-  &.list {
+  &.suggestions {
     display: block;
   }
 `;
@@ -98,8 +93,6 @@ function AutoComplete({
   onResetValue,
   onOutOfSuggestionsClick,
 }) {
-  const autoComplete = useRef();
-
   useEffect(() => {
     document.addEventListener("click", onOutOfSuggestionsClick);
 
@@ -115,18 +108,19 @@ function AutoComplete({
           type="text"
           value={value}
           onChange={onChange}
-          className={`${suggestions.length > 0 ? "list" : "active"}`}
+          className={`${suggestions.length > 0 ? "suggestions" : ""}`}
         />
         <Xbutton onClick={onResetValue}>x</Xbutton>
       </Box>
-      <Div
-        ref={autoComplete}
-        className={`${suggestions.length > 0 ? "list" : ""}`}
-      >
+      <Div className={`${suggestions.length > 0 ? "suggestions" : ""}`}>
         <List>
           {suggestions &&
+            suggestions.length > 0 &&
             suggestions.map((word) => (
-              <Data key={uuid()} onClick={() => onSuggestionClick(word.label)}>
+              <Data
+                key={uuid()}
+                onClick={(event) => onSuggestionClick(event, word.label)}
+              >
                 {word.label}
               </Data>
             ))}

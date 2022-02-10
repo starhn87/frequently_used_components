@@ -28,19 +28,17 @@ const TabElement = styled.button`
 
 function Tab({ selectedTab, onChange, items }) {
   return (
-    <>
-      <TabContrainer>
-        {items.map((tab) => (
-          <TabElement
-            key={tab.key}
-            onClick={() => onChange(tab.key)}
-            className={selectedTab === tab.key ? "selected" : ""}
-          >
-            {tab.title}
-          </TabElement>
-        ))}
-      </TabContrainer>
-    </>
+    <TabContrainer>
+      {items.map((tab) => (
+        <TabElement
+          key={tab.key}
+          onClick={() => onChange(tab.key)}
+          className={selectedTab === tab.key ? "selected" : ""}
+        >
+          {tab.title}
+        </TabElement>
+      ))}
+    </TabContrainer>
   );
 }
 

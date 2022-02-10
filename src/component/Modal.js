@@ -1,22 +1,17 @@
 import React from "react";
 import styled from "styled-components";
 import PropType from "prop-types";
-import { useModal } from "../context/ModalContext";
 
 const ModalBox = styled.div`
   position: fixed;
   overflow: auto;
-  display: none;
+  display: block;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   z-index: 1;
   background-color: rgba(0, 0, 0, 0.4);
-
-  &.active {
-    display: block;
-  }
 `;
 
 const ModalContent = styled.div`
@@ -49,15 +44,9 @@ const ModalText = styled.p`
   color: #4800ce;
 `;
 
-const Modal = ({ value, closeModal, content, onOutOfModalClick }) => {
-  const { modalRef } = useModal();
-
+const Modal = ({ closeModal, content, onOutOfModalClick }) => {
   return (
-    <ModalBox
-      ref={modalRef}
-      onClick={onOutOfModalClick}
-      className={`${value ? "active" : ""}`}
-    >
+    <ModalBox onClick={onOutOfModalClick}>
       <ModalContent>
         <CloseWrapper>
           <Close onMouseUp={closeModal}>&times;</Close>
@@ -69,7 +58,6 @@ const Modal = ({ value, closeModal, content, onOutOfModalClick }) => {
 };
 
 Modal.propTypes = {
-  value: PropType.bool.isRequired,
   closeModal: PropType.func.isRequired,
   content: PropType.node.isRequired,
   onOutOfModalClick: PropType.func.isRequired,

@@ -45,6 +45,7 @@ function TagDemo() {
         value={value}
         onChange={onChange}
         onPressEnter={onPressEnter}
+        placeholder={"Press enter to add tags"}
         tags={tags}
         onRemoveTag={onRemoveTag}
       />

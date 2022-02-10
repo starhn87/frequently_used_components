@@ -20,18 +20,24 @@ function AutoCompleteDemo({ options }) {
     setValue(value);
   };
 
-  const onResetValue = () => {
+  const onResetValue = (event) => {
+    event.stopPropagation();
+
     setValue("");
     setSuggestions([]);
   };
 
-  const onSuggestionClick = (word) => {
-    setValue(word);
+  const onSuggestionClick = (event, label) => {
+    event.stopPropagation();
+
+    setValue(label);
     setSuggestions([]);
   };
 
-  const onOutOfSuggestionsClick = (event, ref) => {
-    setSuggestions([]);
+  const onOutOfSuggestionsClick = () => {
+    if (suggestions.length > 0) {
+      setSuggestions([]);
+    }
   };
 
   return (

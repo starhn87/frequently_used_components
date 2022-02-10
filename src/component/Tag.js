@@ -63,13 +63,21 @@ const Input = styled.input`
   }
 `;
 
-function Tag({ value, onChange, onPressEnter, tags, onRemoveTag }) {
+function Tag({
+  value,
+  onChange,
+  onPressEnter,
+  placeholder,
+  tags,
+  onRemoveTag,
+}) {
   const [active, setActive] = useState(false);
 
   return (
     <Container className={`${active ? "active" : ""}`}>
       <TagList>
         {tags &&
+          tags.length > 0 &&
           tags.map((tag) => (
             <TagBox key={tag}>
               {tag}
@@ -83,7 +91,7 @@ function Tag({ value, onChange, onPressEnter, tags, onRemoveTag }) {
         onKeyPress={onPressEnter}
         onFocus={() => setActive(true)}
         onBlur={() => setActive(false)}
-        placeholder="Press enter to add tags"
+        placeholder={placeholder}
       ></Input>
     </Container>
   );
@@ -93,6 +101,7 @@ Tag.propTypes = {
   value: PropType.string.isRequired,
   onChange: PropType.func.isRequired,
   onPressEnter: PropType.func.isRequired,
+  placeholder: PropType.string.isRequired,
   tags: PropType.arrayOf(PropType.string),
   onRemoveTag: PropType.func.isRequired,
 };

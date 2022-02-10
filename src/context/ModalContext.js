@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useRef, useState } from "react";
+import React, { createContext, useContext, useState } from "react";
 import Modal from "../component/Modal";
 
 const ModalContext = createContext();
@@ -7,7 +7,6 @@ const ModalProvider = ({ children }) => {
   const [value, setValue] = useState(false);
   const [content, setContent] = useState("");
   const [strictMode, setStrictMode] = useState(true);
-  const modalRef = useRef();
 
   const openModal = (newContent, mode = true) => {
     setContent(newContent);
@@ -21,7 +20,7 @@ const ModalProvider = ({ children }) => {
 
   const onOutOfModalClick = (event) => {
     if (!strictMode) {
-      if (event.target !== modalRef.current) {
+      if (event.target !== event.currentTarget) {
         return;
       }
 
@@ -30,14 +29,15 @@ const ModalProvider = ({ children }) => {
   };
 
   return (
-    <ModalContext.Provider value={{ openModal, modalRef }}>
+    <ModalContext.Provider value={{ openModal }}>
       {children}
-      <Modal
-        value={value}
-        closeModal={closeModal}
-        content={content}
-        onOutOfModalClick={onOutOfModalClick}
-      />
+      {value && (
+        <Modal
+          closeModal={closeModal}
+          content={content}
+          onOutOfModalClick={onOutOfModalClick}
+        />
+      )}
     </ModalContext.Provider>
   );
 };
