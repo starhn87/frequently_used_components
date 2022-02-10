@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import PropType from "prop-types";
+import { useModal } from "../context/ModalContext";
 
 const ModalBox = styled.div`
   position: fixed;
@@ -48,8 +49,10 @@ const ModalText = styled.p`
   color: #4800ce;
 `;
 
-const Modal = React.forwardRef(
-  ({ value, closeModal, content, onOutOfModalClick }, modalRef) => (
+const Modal = ({ value, closeModal, content, onOutOfModalClick }) => {
+  const { modalRef } = useModal();
+
+  return (
     <ModalBox
       ref={modalRef}
       onClick={onOutOfModalClick}
@@ -62,8 +65,8 @@ const Modal = React.forwardRef(
         <ModalText>{content}</ModalText>
       </ModalContent>
     </ModalBox>
-  )
-);
+  );
+};
 
 Modal.propTypes = {
   value: PropType.bool.isRequired,

@@ -30,10 +30,9 @@ const ModalProvider = ({ children }) => {
   };
 
   return (
-    <ModalContext.Provider value={{ openModal }}>
+    <ModalContext.Provider value={{ openModal, modalRef }}>
       {children}
       <Modal
-        ref={modalRef}
         value={value}
         closeModal={closeModal}
         content={content}
