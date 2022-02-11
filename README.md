@@ -167,7 +167,7 @@ input 안에 어떻게 태그를 넣는 과정에서 난관을 겪었습니다.
 입력창을 클릭하고 원하시는 단어 입력 후 엔터 키를 누르면 태그가 생깁니다.
 태그를 없애고 싶으면 x 버튼을 누르면 됩니다.
 <br>
-<img src="https://user-images.githubusercontent.com/36434219/151896791-623db991-583c-49db-9ad6-a29b00b3bc47.gif">
+<img src="https://user-images.githubusercontent.com/36434219/153543171-b0f32efd-55ad-462d-bde3-52353955f308.gif">
 <br>
 <br>
 
