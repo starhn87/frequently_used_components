@@ -28,8 +28,7 @@ module.exports = {
     tab: [BASE_JS + "component/Tab.js", BASE_JS + "demo/TabDemo.js"],
     tag: [BASE_JS + "component/Tag.js", BASE_JS + "demo/TagDemo.js"],
     toggle: [BASE_JS + "component/Toggle.js", BASE_JS + "demo/ToggleDemo.js"],
-    main: ["./src/App.js", "./src/index.js"],
-    asset: "./src/assets/movies.js",
+    main: [BASE_JS + "App.js", BASE_JS + "index.js"],
   },
   mode: process.env.NODE_ENV,
   output: {

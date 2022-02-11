@@ -101,7 +101,7 @@ Tag.propTypes = {
   value: PropType.string.isRequired,
   onChange: PropType.func.isRequired,
   onPressEnter: PropType.func.isRequired,
-  placeholder: PropType.string.isRequired,
+  placeholder: PropType.string,
   tags: PropType.arrayOf(PropType.string),
   onRemoveTag: PropType.func.isRequired,
 };

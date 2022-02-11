@@ -7,7 +7,6 @@ import TabDemo from "./demo/TabDemo";
 import TagDemo from "./demo/TagDemo";
 import ClickToEditDemo from "./demo/ClickToEditDemo";
 import AutoCompleteDemo from "./demo/AutoCompleteDemo";
-import movieData from "./assets/movies";
 
 function App() {
   return (
@@ -18,7 +17,7 @@ function App() {
       <ModalDemo />
       <TabDemo />
       <TagDemo />
-      <AutoCompleteDemo options={movieData} />
+      <AutoCompleteDemo />
       <ClickToEditDemo />
     </>
   );
