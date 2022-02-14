@@ -7,18 +7,21 @@ import TabDemo from "./demo/TabDemo";
 import TagDemo from "./demo/TagDemo";
 import ClickToEditDemo from "./demo/ClickToEditDemo";
 import AutoCompleteDemo from "./demo/AutoCompleteDemo";
+import ModalProvider from "./context/ModalContext";
 
 function App() {
   return (
     <>
       <GlobalStyles />
       <MouseCircle />
-      <ToggleDemo />
-      <ModalDemo />
-      <TabDemo />
-      <TagDemo />
-      <AutoCompleteDemo />
-      <ClickToEditDemo />
+      <ModalProvider>
+        <ToggleDemo />
+        <ModalDemo />
+        <TabDemo />
+        <TagDemo />
+        <AutoCompleteDemo />
+        <ClickToEditDemo />
+      </ModalProvider>
     </>
   );
 }
